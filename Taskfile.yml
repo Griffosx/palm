@@ -1,0 +1,34 @@
+version: "3"
+
+tasks:
+  test:
+    desc: Run all tests
+    cmds:
+      - go test ./tests/... -v
+
+  test:short:
+    desc: Run tests with short flag
+    cmds:
+      - go test ./tests/... -v -short
+
+  build:
+    desc: Build the application
+    cmds:
+      - go build -o palm ./src
+
+  run:
+    desc: Run the application
+    cmds:
+      - go run ./src
+
+  lint:
+    desc: Run linters
+    cmds:
+      - go vet ./...
+      - golint ./...
+
+  clean:
+    desc: Clean build artifacts
+    cmds:
+      - rm -f palm
+      - rm -f palm.db
