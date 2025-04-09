@@ -10,13 +10,18 @@ import (
 )
 
 // SetupTestDB creates an in-memory SQLite database for testing
-// It also runs migrations for the Account entity
+// It also runs migrations for all entities
 func SetupTestDB(t *testing.T) *gorm.DB {
 	db, err := gorm.Open(sqlite.Open(":memory:"), &gorm.Config{})
 	require.NoError(t, err)
 
 	// Run migrations
-	err = db.AutoMigrate(&entities.Account{})
+	err = db.AutoMigrate(
+		&entities.Account{},
+		&entities.Message{},
+		&entities.Recipient{},
+		&entities.Attachment{},
+	)
 	require.NoError(t, err)
 
 	return db
