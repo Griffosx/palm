@@ -44,6 +44,11 @@ tasks:
     desc: Clean build artifacts
     cmds:
       - rm -f palm
-      - rm -f palm.db
+      - rm -f palm.sqlite
       - rm -f coverage.out
       - rm -f coverage.html
+
+  populate:emails:
+    desc: Populate database with sample emails from fixtures
+    cmds:
+      - go run -mod=mod scripts/populate_emails.go

@@ -1,0 +1,93 @@
+[
+  {
+    "account_id": 1,
+    "message": {
+      "subject": "Welcome to Palm Email Client",
+      "body": "<h1>Welcome to Palm!</h1><p>This is a sample email created by the fixture utility.</p>",
+      "body_preview": "Welcome to Palm! This is a sample email created by the fixture utility.",
+      "sender_email": "noreply@palm.example.com",
+      "sender_name": "Palm Support Team",
+      "received_datetime": "2023-05-15T10:15:30Z",
+      "sent_datetime": "2023-05-15T10:15:00Z",
+      "is_draft": false,
+      "is_read": false,
+      "importance": "Normal",
+      "conversation_id": "conv-123456"
+    },
+    "recipients": [
+      {
+        "email": "user@example.com",
+        "name": "Test User",
+        "recipient_type": "To"
+      },
+      {
+        "email": "admin@example.com",
+        "name": "Admin User",
+        "recipient_type": "Cc"
+      }
+    ],
+    "attachments": [
+      {
+        "filename": "welcome.pdf",
+        "mime_type": "application/pdf",
+        "size": 102400,
+        "local_path": "/tmp/welcome.pdf"
+      }
+    ]
+  },
+  {
+    "account_id": 1,
+    "message": {
+      "subject": "Your Weekly Summary",
+      "body": "<h2>Weekly Summary</h2><p>Here is your activity summary for the past week.</p>",
+      "body_preview": "Weekly Summary. Here is your activity summary for the past week.",
+      "sender_email": "updates@palm.example.com",
+      "sender_name": "Palm Updates",
+      "received_datetime": "2023-05-16T09:00:00Z",
+      "sent_datetime": "2023-05-16T08:55:00Z",
+      "is_draft": false,
+      "is_read": true,
+      "importance": "Normal",
+      "conversation_id": "conv-234567"
+    },
+    "recipients": [
+      {
+        "email": "user@example.com",
+        "name": "Test User",
+        "recipient_type": "To"
+      }
+    ],
+    "attachments": []
+  },
+  {
+    "account_id": 1,
+    "message": {
+      "subject": "Important Action Required",
+      "body": "<h1>Action Required</h1><p>Please verify your account within 24 hours.</p>",
+      "body_preview": "Action Required. Please verify your account within 24 hours.",
+      "sender_email": "security@palm.example.com",
+      "sender_name": "Palm Security",
+      "received_datetime": "2023-05-17T14:30:00Z",
+      "sent_datetime": "2023-05-17T14:25:00Z",
+      "is_draft": false,
+      "is_read": false,
+      "importance": "High",
+      "conversation_id": "conv-345678"
+    },
+    "recipients": [
+      {
+        "email": "user@example.com",
+        "name": "Test User",
+        "recipient_type": "To"
+      }
+    ],
+    "attachments": [
+      {
+        "filename": "security_steps.docx",
+        "mime_type": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+        "size": 35840,
+        "local_path": "/tmp/security_steps.docx"
+      }
+    ]
+  }
+]

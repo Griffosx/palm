@@ -32,27 +32,27 @@ func (r *accountRepository) Create(ctx context.Context, account *entities.Accoun
 			Msg("Failed to create account")
 	} else {
 		config.Logger.Info().
-			Int64("id", account.ID).
+			Uint("id", account.ID).
 			Str("email", account.Email).
 			Msg("Account created successfully")
 	}
 	return err
 }
 
-func (r *accountRepository) GetByID(ctx context.Context, id int64) (*entities.Account, error) {
-	config.Logger.Debug().Int64("id", id).Msg("Getting account by ID")
+func (r *accountRepository) GetByID(ctx context.Context, id uint) (*entities.Account, error) {
+	config.Logger.Debug().Uint("id", id).Msg("Getting account by ID")
 
 	var account entities.Account
 	err := r.db.WithContext(ctx).First(&account, id).Error
 	if err != nil {
 		if errors.Is(err, gorm.ErrRecordNotFound) {
-			config.Logger.Warn().Int64("id", id).Msg("Account not found")
+			config.Logger.Warn().Uint("id", id).Msg("Account not found")
 			return nil, repositories.ErrAccountNotFound
 		}
-		config.Logger.Error().Err(err).Int64("id", id).Msg("Error retrieving account")
+		config.Logger.Error().Err(err).Uint("id", id).Msg("Error retrieving account")
 		return nil, err
 	}
-	config.Logger.Debug().Int64("id", id).Str("email", account.Email).Msg("Account retrieved successfully")
+	config.Logger.Debug().Uint("id", id).Str("email", account.Email).Msg("Account retrieved successfully")
 	return &account, nil
 }
 
@@ -69,23 +69,23 @@ func (r *accountRepository) GetByEmail(ctx context.Context, email string) (*enti
 		config.Logger.Error().Err(err).Str("email", email).Msg("Error retrieving account")
 		return nil, err
 	}
-	config.Logger.Debug().Int64("id", account.ID).Str("email", email).Msg("Account retrieved successfully")
+	config.Logger.Debug().Uint("id", account.ID).Str("email", email).Msg("Account retrieved successfully")
 	return &account, nil
 }
 
-func (r *accountRepository) Delete(ctx context.Context, id int64) error {
-	config.Logger.Debug().Int64("id", id).Msg("Deleting account")
+func (r *accountRepository) Delete(ctx context.Context, id uint) error {
+	config.Logger.Debug().Uint("id", id).Msg("Deleting account")
 
 	result := r.db.WithContext(ctx).Delete(&entities.Account{}, id)
 	if result.Error != nil {
-		config.Logger.Error().Err(result.Error).Int64("id", id).Msg("Error deleting account")
+		config.Logger.Error().Err(result.Error).Uint("id", id).Msg("Error deleting account")
 		return result.Error
 	}
 	if result.RowsAffected == 0 {
-		config.Logger.Warn().Int64("id", id).Msg("Account not found for deletion")
+		config.Logger.Warn().Uint("id", id).Msg("Account not found for deletion")
 		return repositories.ErrAccountNotFound
 	}
-	config.Logger.Info().Int64("id", id).Msg("Account deleted successfully")
+	config.Logger.Info().Uint("id", id).Msg("Account deleted successfully")
 	return nil
 }
 

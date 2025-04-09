@@ -62,7 +62,7 @@ func (s *AccountService) CreateAccount(ctx context.Context, email, accountType s
 	}
 
 	config.Logger.Info().
-		Int64("id", account.ID).
+		Uint("id", account.ID).
 		Str("email", email).
 		Str("accountType", accountType).
 		Msg("Account created successfully")
@@ -70,20 +70,20 @@ func (s *AccountService) CreateAccount(ctx context.Context, email, accountType s
 	return account, nil
 }
 
-func (s *AccountService) GetAccount(ctx context.Context, id int64) (*entities.Account, error) {
-	config.Logger.Debug().Int64("id", id).Msg("Getting account by ID")
+func (s *AccountService) GetAccount(ctx context.Context, id uint) (*entities.Account, error) {
+	config.Logger.Debug().Uint("id", id).Msg("Getting account by ID")
 
 	account, err := s.repo.GetByID(ctx, id)
 	if err != nil {
 		config.Logger.Error().
 			Err(err).
-			Int64("id", id).
+			Uint("id", id).
 			Msg("Failed to get account")
 		return nil, fmt.Errorf("failed to get account: %w", err)
 	}
 
 	config.Logger.Debug().
-		Int64("id", id).
+		Uint("id", id).
 		Str("email", account.Email).
 		Str("accountType", account.AccountType).
 		Msg("Account retrieved successfully")
@@ -104,7 +104,7 @@ func (s *AccountService) GetAccountByEmail(ctx context.Context, email string) (*
 	}
 
 	config.Logger.Debug().
-		Int64("id", account.ID).
+		Uint("id", account.ID).
 		Str("email", email).
 		Str("accountType", account.AccountType).
 		Msg("Account retrieved successfully by email")
@@ -112,18 +112,18 @@ func (s *AccountService) GetAccountByEmail(ctx context.Context, email string) (*
 	return account, nil
 }
 
-func (s *AccountService) DeleteAccount(ctx context.Context, id int64) error {
-	config.Logger.Info().Int64("id", id).Msg("Deleting account")
+func (s *AccountService) DeleteAccount(ctx context.Context, id uint) error {
+	config.Logger.Info().Uint("id", id).Msg("Deleting account")
 
 	if err := s.repo.Delete(ctx, id); err != nil {
 		config.Logger.Error().
 			Err(err).
-			Int64("id", id).
+			Uint("id", id).
 			Msg("Failed to delete account")
 		return fmt.Errorf("failed to delete account: %w", err)
 	}
 
-	config.Logger.Info().Int64("id", id).Msg("Account deleted successfully")
+	config.Logger.Info().Uint("id", id).Msg("Account deleted successfully")
 	return nil
 }
 

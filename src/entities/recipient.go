@@ -1,5 +1,7 @@
 package entities
 
+import "gorm.io/gorm"
+
 // RecipientType represents the type of recipient (To, Cc, Bcc)
 type RecipientType string
 
@@ -11,9 +13,10 @@ const (
 
 // Recipient represents an email recipient
 type Recipient struct {
-	RecipientID   int64         `json:"recipient_id" gorm:"primaryKey"`
-	MessageID     int64         `json:"message_id" gorm:"not null"`
+	gorm.Model
 	Email         string        `json:"email" gorm:"not null"`
 	Name          *string       `json:"name,omitempty"`
 	RecipientType RecipientType `json:"recipient_type" gorm:"not null"`
+	MessageID     uint          `json:"message_id"`
+	Message       Message       `json:"message,omitempty"`
 }

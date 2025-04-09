@@ -88,19 +88,19 @@ func (s *EmailService) validateEmail(email *EmailDTO) error {
 // Create creates a new email with its related entities in a single transaction
 func (s *EmailService) Create(ctx context.Context, email *EmailDTO) error {
 	if err := s.validateEmail(email); err != nil {
-		accountID := int64(0)
+		accountID := uint(0)
 		if email.Message != nil {
 			accountID = email.Message.AccountID
 		}
 		config.Logger.Error().
 			Err(err).
-			Int64("accountID", accountID).
+			Uint("accountID", accountID).
 			Msg("Email validation failed")
 		return err
 	}
 
 	config.Logger.Info().
-		Int64("accountID", email.Message.AccountID).
+		Uint("accountID", email.Message.AccountID).
 		Str("subject", stringOrEmpty(email.Message.Subject)).
 		Str("senderEmail", email.Message.SenderEmail).
 		Int("recipientCount", len(email.Recipients)).
@@ -113,18 +113,18 @@ func (s *EmailService) Create(ctx context.Context, email *EmailDTO) error {
 		if err := tx.Create(email.Message).Error; err != nil {
 			config.Logger.Error().
 				Err(err).
-				Int64("accountID", email.Message.AccountID).
+				Uint("accountID", email.Message.AccountID).
 				Msg("Failed to create message")
 			return err
 		}
 
 		// Set the message ID on all recipients and create them
 		for _, recipient := range email.Recipients {
-			recipient.MessageID = email.Message.MessageID
+			recipient.MessageID = email.Message.ID
 			if err := tx.Create(recipient).Error; err != nil {
 				config.Logger.Error().
 					Err(err).
-					Int64("messageID", email.Message.MessageID).
+					Uint("messageID", email.Message.ID).
 					Str("email", recipient.Email).
 					Msg("Failed to create recipient")
 				return err
@@ -133,11 +133,11 @@ func (s *EmailService) Create(ctx context.Context, email *EmailDTO) error {
 
 		// Create attachments if any
 		for _, attachment := range email.Attachments {
-			attachment.MessageID = email.Message.MessageID
+			attachment.MessageID = email.Message.ID
 			if err := tx.Create(attachment).Error; err != nil {
 				config.Logger.Error().
 					Err(err).
-					Int64("messageID", email.Message.MessageID).
+					Uint("messageID", email.Message.ID).
 					Str("filename", attachment.Filename).
 					Msg("Failed to create attachment")
 				return err
@@ -150,14 +150,14 @@ func (s *EmailService) Create(ctx context.Context, email *EmailDTO) error {
 	if err != nil {
 		config.Logger.Error().
 			Err(err).
-			Int64("accountID", email.Message.AccountID).
+			Uint("accountID", email.Message.AccountID).
 			Msg("Email creation failed")
 		return fmt.Errorf("%w: %s", ErrEmailCreationFailed, err.Error())
 	}
 
 	config.Logger.Info().
-		Int64("messageID", email.Message.MessageID).
-		Int64("accountID", email.Message.AccountID).
+		Uint("messageID", email.Message.ID).
+		Uint("accountID", email.Message.AccountID).
 		Int("recipientCount", len(email.Recipients)).
 		Int("attachmentCount", len(email.Attachments)).
 		Msg("Email created successfully")
@@ -166,15 +166,15 @@ func (s *EmailService) Create(ctx context.Context, email *EmailDTO) error {
 }
 
 // GetByID retrieves an email with all its components by message ID
-func (s *EmailService) GetByID(ctx context.Context, messageID int64) (*EmailDTO, error) {
-	config.Logger.Debug().Int64("messageID", messageID).Msg("Getting email by ID")
+func (s *EmailService) GetByID(ctx context.Context, messageID uint) (*EmailDTO, error) {
+	config.Logger.Debug().Uint("messageID", messageID).Msg("Getting email by ID")
 
 	// Get the message
 	message, err := s.messageRepo.GetByID(ctx, messageID)
 	if err != nil {
 		config.Logger.Error().
 			Err(err).
-			Int64("messageID", messageID).
+			Uint("messageID", messageID).
 			Msg("Failed to get message")
 		if errors.Is(err, repositories.ErrMessageNotFound) {
 			return nil, ErrEmailNotFound
@@ -187,7 +187,7 @@ func (s *EmailService) GetByID(ctx context.Context, messageID int64) (*EmailDTO,
 	if err != nil {
 		config.Logger.Error().
 			Err(err).
-			Int64("messageID", messageID).
+			Uint("messageID", messageID).
 			Msg("Failed to get recipients")
 		return nil, err
 	}
@@ -197,7 +197,7 @@ func (s *EmailService) GetByID(ctx context.Context, messageID int64) (*EmailDTO,
 	if err != nil {
 		config.Logger.Error().
 			Err(err).
-			Int64("messageID", messageID).
+			Uint("messageID", messageID).
 			Msg("Failed to get attachments")
 		return nil, err
 	}
@@ -209,7 +209,7 @@ func (s *EmailService) GetByID(ctx context.Context, messageID int64) (*EmailDTO,
 	}
 
 	config.Logger.Debug().
-		Int64("messageID", messageID).
+		Uint("messageID", messageID).
 		Int("recipientCount", len(recipients)).
 		Int("attachmentCount", len(attachments)).
 		Msg("Email retrieved successfully")
@@ -218,9 +218,9 @@ func (s *EmailService) GetByID(ctx context.Context, messageID int64) (*EmailDTO,
 }
 
 // ListCount returns the total number of emails for a specific account
-func (s *EmailService) ListCount(ctx context.Context, accountID int64) (int64, error) {
+func (s *EmailService) ListCount(ctx context.Context, accountID uint) (int64, error) {
 	config.Logger.Debug().
-		Int64("accountID", accountID).
+		Uint("accountID", accountID).
 		Msg("Counting emails for account")
 
 	var totalCount int64
@@ -233,23 +233,23 @@ func (s *EmailService) ListCount(ctx context.Context, accountID int64) (int64, e
 	if err != nil {
 		config.Logger.Error().
 			Err(err).
-			Int64("accountID", accountID).
+			Uint("accountID", accountID).
 			Msg("Failed to count messages")
 		return 0, err
 	}
 
 	config.Logger.Debug().
-		Int64("accountID", accountID).
-		Int64("count", totalCount).
+		Uint("accountID", accountID).
+		Uint("count", uint(totalCount)).
 		Msg("Email count retrieved successfully")
 
 	return totalCount, nil
 }
 
 // List retrieves a paginated list of emails for a specific account
-func (s *EmailService) List(ctx context.Context, accountID int64, pageSize int, page int) (*PaginatedEmailsResult, error) {
+func (s *EmailService) List(ctx context.Context, accountID uint, pageSize int, page int) (*PaginatedEmailsResult, error) {
 	config.Logger.Debug().
-		Int64("accountID", accountID).
+		Uint("accountID", accountID).
 		Int("pageSize", pageSize).
 		Int("page", page).
 		Msg("Listing emails for account")
@@ -281,7 +281,7 @@ func (s *EmailService) List(ctx context.Context, accountID int64, pageSize int, 
 	if err != nil {
 		config.Logger.Error().
 			Err(err).
-			Int64("accountID", accountID).
+			Uint("accountID", accountID).
 			Msg("Failed to count messages")
 		return nil, err
 	}
@@ -302,7 +302,7 @@ func (s *EmailService) List(ctx context.Context, accountID int64, pageSize int, 
 	if err != nil {
 		config.Logger.Error().
 			Err(err).
-			Int64("accountID", accountID).
+			Uint("accountID", accountID).
 			Msg("Failed to list messages")
 		return nil, err
 	}
@@ -319,21 +319,21 @@ func (s *EmailService) List(ctx context.Context, accountID int64, pageSize int, 
 	// For each message, fetch related entities and create an EmailDTO
 	for _, message := range messages {
 		// Get recipients for this message
-		recipients, err := s.recipientRepo.GetByMessageID(ctx, message.MessageID)
+		recipients, err := s.recipientRepo.GetByMessageID(ctx, message.ID)
 		if err != nil {
 			config.Logger.Error().
 				Err(err).
-				Int64("messageID", message.MessageID).
+				Uint("messageID", message.ID).
 				Msg("Failed to get recipients")
 			continue
 		}
 
 		// Get attachments for this message
-		attachments, err := s.attachmentRepo.GetByMessageID(ctx, message.MessageID)
+		attachments, err := s.attachmentRepo.GetByMessageID(ctx, message.ID)
 		if err != nil {
 			config.Logger.Error().
 				Err(err).
-				Int64("messageID", message.MessageID).
+				Uint("messageID", message.ID).
 				Msg("Failed to get attachments")
 			continue
 		}
@@ -348,9 +348,9 @@ func (s *EmailService) List(ctx context.Context, accountID int64, pageSize int, 
 	}
 
 	config.Logger.Debug().
-		Int64("accountID", accountID).
+		Uint("accountID", uint(accountID)).
 		Int("found", len(result.Emails)).
-		Int64("total", totalCount).
+		Uint("total", uint(totalCount)).
 		Int("page", page).
 		Int("totalPages", totalPages).
 		Msg("Emails listed successfully")

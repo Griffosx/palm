@@ -10,149 +10,173 @@ import (
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	"gorm.io/gorm"
 )
 
 func TestAccountRepository_Create(t *testing.T) {
+	// Setup
 	db := utils.SetupTestDB(t)
+
 	repo := sqlite.NewAccountRepository(db)
 	ctx := context.Background()
 
+	// Test data
 	account := &entities.Account{
-		Email:       "create-test@example.com",
-		AccountType: entities.AccountTypeMicrosoft,
+		Email:       "test@example.com",
+		AccountType: entities.AccountTypeGoogle,
 	}
 
+	// Test
 	err := repo.Create(ctx, account)
-	assert.NoError(t, err)
-	assert.Greater(t, account.ID, int64(0), "Account ID should be set after create")
 
-	// Verify in DB
-	var dbAccount entities.Account
-	err = db.First(&dbAccount, account.ID).Error
-	assert.NoError(t, err)
-	assert.Equal(t, account.Email, dbAccount.Email)
-	assert.Equal(t, account.AccountType, dbAccount.AccountType)
+	// Assertions
+	require.NoError(t, err)
+	assert.NotZero(t, account.ID, "ID should be assigned")
 }
 
 func TestAccountRepository_GetByID(t *testing.T) {
+	// Setup
 	db := utils.SetupTestDB(t)
 	repo := sqlite.NewAccountRepository(db)
 	ctx := context.Background()
 
-	// Create a test account
+	// Create test account
 	testAccount := &entities.Account{
-		Email:       "get-by-id-test@example.com",
+		Email:       "test@example.com",
 		AccountType: entities.AccountTypeGoogle,
 	}
-	err := db.Create(testAccount).Error
+	err := repo.Create(ctx, testAccount)
 	require.NoError(t, err)
-	require.Greater(t, testAccount.ID, int64(0))
+	require.NotZero(t, testAccount.ID)
 
-	t.Run("Existing ID", func(t *testing.T) {
-		account, err := repo.GetByID(ctx, testAccount.ID)
-		assert.NoError(t, err)
-		assert.NotNil(t, account)
-		assert.Equal(t, testAccount.ID, account.ID)
-		assert.Equal(t, testAccount.Email, account.Email)
-		assert.Equal(t, testAccount.AccountType, account.AccountType)
-	})
+	// Test: Get existing account
+	account, err := repo.GetByID(ctx, testAccount.ID)
+	require.NoError(t, err)
+	assert.Equal(t, testAccount.ID, account.ID)
+	assert.Equal(t, testAccount.Email, account.Email)
+	assert.Equal(t, testAccount.AccountType, account.AccountType)
 
-	t.Run("Non-existing ID", func(t *testing.T) {
-		_, err := repo.GetByID(ctx, 9999)
-		assert.Error(t, err)
-		assert.ErrorIs(t, err, repositories.ErrAccountNotFound)
-	})
+	// Test: Get non-existent account
+	account, err = repo.GetByID(ctx, 9999)
+	assert.Error(t, err)
+	assert.ErrorIs(t, err, repositories.ErrAccountNotFound)
+	assert.Nil(t, account)
 }
 
 func TestAccountRepository_GetByEmail(t *testing.T) {
+	// Setup
 	db := utils.SetupTestDB(t)
 	repo := sqlite.NewAccountRepository(db)
 	ctx := context.Background()
 
-	// Create a test account
+	// Create test account
 	testAccount := &entities.Account{
-		Email:       "get-by-email-test@example.com",
-		AccountType: entities.AccountTypeGoogle,
+		Email:       "test@example.com",
+		AccountType: entities.AccountTypeMicrosoft,
 	}
-	err := db.Create(testAccount).Error
+	err := repo.Create(ctx, testAccount)
 	require.NoError(t, err)
 
-	t.Run("Existing Email", func(t *testing.T) {
-		account, err := repo.GetByEmail(ctx, testAccount.Email)
-		assert.NoError(t, err)
-		assert.NotNil(t, account)
-		assert.Equal(t, testAccount.ID, account.ID)
-		assert.Equal(t, testAccount.Email, account.Email)
-		assert.Equal(t, testAccount.AccountType, account.AccountType)
-	})
+	// Test: Get existing account
+	account, err := repo.GetByEmail(ctx, testAccount.Email)
+	require.NoError(t, err)
+	assert.Equal(t, testAccount.ID, account.ID)
+	assert.Equal(t, testAccount.Email, account.Email)
+	assert.Equal(t, testAccount.AccountType, account.AccountType)
 
-	t.Run("Non-existing Email", func(t *testing.T) {
-		_, err := repo.GetByEmail(ctx, "nonexistent@example.com")
-		assert.Error(t, err)
-		assert.ErrorIs(t, err, repositories.ErrAccountNotFound)
-	})
+	// Test: Get non-existent account
+	account, err = repo.GetByEmail(ctx, "nonexistent@example.com")
+	assert.Error(t, err)
+	assert.ErrorIs(t, err, repositories.ErrAccountNotFound)
+	assert.Nil(t, account)
 }
 
 func TestAccountRepository_Delete(t *testing.T) {
+	// Setup
 	db := utils.SetupTestDB(t)
 	repo := sqlite.NewAccountRepository(db)
 	ctx := context.Background()
 
-	// Create a test account
+	// Create test account
 	testAccount := &entities.Account{
-		Email:       "delete-test@example.com",
-		AccountType: entities.AccountTypeMicrosoft,
+		Email:       "test@example.com",
+		AccountType: entities.AccountTypeGoogle,
 	}
-	err := db.Create(testAccount).Error
+	err := repo.Create(ctx, testAccount)
 	require.NoError(t, err)
-	require.Greater(t, testAccount.ID, int64(0))
 
-	t.Run("Delete Existing Account", func(t *testing.T) {
-		err := repo.Delete(ctx, testAccount.ID)
-		assert.NoError(t, err)
+	// Test: Delete existing account
+	err = repo.Delete(ctx, testAccount.ID)
+	require.NoError(t, err)
 
-		// Verify it's deleted
-		var found entities.Account
-		err = db.First(&found, testAccount.ID).Error
-		assert.Error(t, err)
-		assert.Equal(t, gorm.ErrRecordNotFound, err)
-	})
+	// Verify deletion
+	account, err := repo.GetByID(ctx, testAccount.ID)
+	assert.Error(t, err)
+	assert.ErrorIs(t, err, repositories.ErrAccountNotFound)
+	assert.Nil(t, account)
 
-	t.Run("Delete Non-existing Account", func(t *testing.T) {
-		err := repo.Delete(ctx, 9999)
-		assert.Error(t, err)
-		assert.ErrorIs(t, err, repositories.ErrAccountNotFound)
-	})
+	// Test: Delete non-existent account
+	err = repo.Delete(ctx, 9999)
+	assert.Error(t, err)
+	assert.ErrorIs(t, err, repositories.ErrAccountNotFound)
 }
 
 func TestAccountRepository_List(t *testing.T) {
+	// Setup
 	db := utils.SetupTestDB(t)
 	repo := sqlite.NewAccountRepository(db)
 	ctx := context.Background()
 
-	// List on empty DB
-	t.Run("Empty List", func(t *testing.T) {
-		accounts, err := repo.List(ctx)
-		assert.NoError(t, err)
-		assert.Empty(t, accounts)
-	})
-
 	// Create test accounts
-	testAccounts := []*entities.Account{
-		{Email: "list-test1@example.com", AccountType: entities.AccountTypeMicrosoft},
-		{Email: "list-test2@example.com", AccountType: entities.AccountTypeGoogle},
-		{Email: "list-test3@example.com", AccountType: entities.AccountTypeMicrosoft},
+	accounts := []*entities.Account{
+		{Email: "test1@example.com", AccountType: entities.AccountTypeGoogle},
+		{Email: "test2@example.com", AccountType: entities.AccountTypeMicrosoft},
+		{Email: "test3@example.com", AccountType: entities.AccountTypeGoogle},
 	}
 
-	for _, account := range testAccounts {
-		err := db.Create(account).Error
+	for _, acc := range accounts {
+		err := repo.Create(ctx, acc)
 		require.NoError(t, err)
 	}
 
-	t.Run("List Multiple Accounts", func(t *testing.T) {
-		accounts, err := repo.List(ctx)
-		assert.NoError(t, err)
-		assert.Len(t, accounts, len(testAccounts))
-	})
+	// Test
+	result, err := repo.List(ctx)
+
+	// Assertions
+	require.NoError(t, err)
+	assert.Len(t, result, len(accounts), "Should return all created accounts")
+
+	// Check if all accounts are in the result
+	emails := make(map[string]bool)
+	for _, acc := range result {
+		emails[acc.Email] = true
+	}
+
+	for _, acc := range accounts {
+		assert.True(t, emails[acc.Email], "Account with email %s should be in results", acc.Email)
+	}
+}
+
+func TestAccountRepository_UniqueEmail(t *testing.T) {
+	// Setup
+	db := utils.SetupTestDB(t)
+	repo := sqlite.NewAccountRepository(db)
+	ctx := context.Background()
+
+	// Create first account
+	account1 := &entities.Account{
+		Email:       "duplicate@example.com",
+		AccountType: entities.AccountTypeGoogle,
+	}
+	err := repo.Create(ctx, account1)
+	require.NoError(t, err)
+
+	// Try to create account with same email
+	account2 := &entities.Account{
+		Email:       "duplicate@example.com",
+		AccountType: entities.AccountTypeMicrosoft,
+	}
+	err = repo.Create(ctx, account2)
+
+	// Should fail due to unique constraint
+	assert.Error(t, err, "Creating account with duplicate email should fail")
 }

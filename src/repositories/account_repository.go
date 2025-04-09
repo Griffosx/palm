@@ -13,8 +13,8 @@ var (
 
 type AccountRepository interface {
 	Create(ctx context.Context, account *entities.Account) error
-	GetByID(ctx context.Context, id int64) (*entities.Account, error)
+	GetByID(ctx context.Context, id uint) (*entities.Account, error)
 	GetByEmail(ctx context.Context, email string) (*entities.Account, error)
-	Delete(ctx context.Context, id int64) error
+	Delete(ctx context.Context, id uint) error
 	List(ctx context.Context) ([]*entities.Account, error)
 }

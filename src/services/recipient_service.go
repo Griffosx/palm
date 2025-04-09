@@ -41,7 +41,7 @@ func (s *RecipientService) validateRecipientType(recipientType entities.Recipien
 
 func (s *RecipientService) CreateRecipient(ctx context.Context, recipient *entities.Recipient) error {
 	config.Logger.Info().
-		Int64("messageID", recipient.MessageID).
+		Uint("messageID", recipient.MessageID).
 		Str("email", recipient.Email).
 		Str("type", string(recipient.RecipientType)).
 		Msg("Creating new recipient")
@@ -53,51 +53,51 @@ func (s *RecipientService) CreateRecipient(ctx context.Context, recipient *entit
 	if err := s.repo.Create(ctx, recipient); err != nil {
 		config.Logger.Error().
 			Err(err).
-			Int64("messageID", recipient.MessageID).
+			Uint("messageID", recipient.MessageID).
 			Str("email", recipient.Email).
 			Msg("Failed to create recipient")
 		return fmt.Errorf("failed to create recipient: %w", err)
 	}
 
 	config.Logger.Info().
-		Int64("recipientID", recipient.RecipientID).
-		Int64("messageID", recipient.MessageID).
+		Uint("recipientID", recipient.ID).
+		Uint("messageID", recipient.MessageID).
 		Msg("Recipient created successfully")
 
 	return nil
 }
 
-func (s *RecipientService) GetRecipientsByMessageID(ctx context.Context, messageID int64) ([]*entities.Recipient, error) {
-	config.Logger.Debug().Int64("messageID", messageID).Msg("Getting recipients by message ID")
+func (s *RecipientService) GetRecipientsByMessageID(ctx context.Context, messageID uint) ([]*entities.Recipient, error) {
+	config.Logger.Debug().Uint("messageID", messageID).Msg("Getting recipients by message ID")
 
 	recipients, err := s.repo.GetByMessageID(ctx, messageID)
 	if err != nil {
 		config.Logger.Error().
 			Err(err).
-			Int64("messageID", messageID).
+			Uint("messageID", messageID).
 			Msg("Failed to get recipients by message ID")
 		return nil, fmt.Errorf("failed to get recipients: %w", err)
 	}
 
 	config.Logger.Debug().
-		Int64("messageID", messageID).
+		Uint("messageID", messageID).
 		Int("count", len(recipients)).
 		Msg("Recipients retrieved successfully")
 
 	return recipients, nil
 }
 
-func (s *RecipientService) DeleteRecipientsByMessageID(ctx context.Context, messageID int64) error {
-	config.Logger.Info().Int64("messageID", messageID).Msg("Deleting all recipients for message")
+func (s *RecipientService) DeleteRecipientsByMessageID(ctx context.Context, messageID uint) error {
+	config.Logger.Info().Uint("messageID", messageID).Msg("Deleting all recipients for message")
 
 	if err := s.repo.DeleteByMessageID(ctx, messageID); err != nil {
 		config.Logger.Error().
 			Err(err).
-			Int64("messageID", messageID).
+			Uint("messageID", messageID).
 			Msg("Failed to delete recipients for message")
 		return fmt.Errorf("failed to delete recipients: %w", err)
 	}
 
-	config.Logger.Info().Int64("messageID", messageID).Msg("Recipients deleted successfully")
+	config.Logger.Info().Uint("messageID", messageID).Msg("Recipients deleted successfully")
 	return nil
 }

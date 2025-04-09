@@ -13,7 +13,7 @@ var (
 
 type MessageRepository interface {
 	Create(ctx context.Context, message *entities.Message) error
-	GetByID(ctx context.Context, id int64) (*entities.Message, error)
+	GetByID(ctx context.Context, id uint) (*entities.Message, error)
 	Update(ctx context.Context, message *entities.Message) error
-	Delete(ctx context.Context, id int64) error
+	Delete(ctx context.Context, id uint) error
 }
