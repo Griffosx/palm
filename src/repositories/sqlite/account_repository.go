@@ -19,15 +19,15 @@ func NewAccountRepository(db *gorm.DB) repositories.AccountRepository {
 	return &accountRepository{db: db}
 }
 
-func (r *accountRepository) Create(ctx context.Context, account *entities.Account) error {
+func (r *accountRepository) Create(ctx context.Context, account *entities.Account) *gorm.DB {
 	config.Logger.Debug().
 		Str("email", account.Email).
 		Msg("Creating new account")
 
-	err := r.db.WithContext(ctx).Create(account).Error
-	if err != nil {
+	result := r.db.WithContext(ctx).Create(account)
+	if result.Error != nil {
 		config.Logger.Error().
-			Err(err).
+			Err(result.Error).
 			Str("email", account.Email).
 			Msg("Failed to create account")
 	} else {
@@ -36,7 +36,7 @@ func (r *accountRepository) Create(ctx context.Context, account *entities.Accoun
 			Str("email", account.Email).
 			Msg("Account created successfully")
 	}
-	return err
+	return result
 }
 
 func (r *accountRepository) GetByID(ctx context.Context, id uint) (*entities.Account, error) {

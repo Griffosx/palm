@@ -20,17 +20,17 @@ func NewMessageRepository(db *gorm.DB) repositories.MessageRepository {
 	return &messageRepository{db: db}
 }
 
-func (r *messageRepository) Create(ctx context.Context, message *entities.Message) error {
+func (r *messageRepository) Create(ctx context.Context, message *entities.Message) *gorm.DB {
 	fmt.Printf("\n\nCreating message: %+v\n\n", message)
 	config.Logger.Debug().
 		Uint("accountID", message.AccountID).
 		Str("senderEmail", message.SenderEmail).
 		Msg("Creating new message")
 
-	err := r.db.WithContext(ctx).Create(message).Error
-	if err != nil {
+	result := r.db.WithContext(ctx).Create(message)
+	if result.Error != nil {
 		config.Logger.Error().
-			Err(err).
+			Err(result.Error).
 			Uint("accountID", message.AccountID).
 			Str("senderEmail", message.SenderEmail).
 			Msg("Failed to create message")
@@ -40,7 +40,7 @@ func (r *messageRepository) Create(ctx context.Context, message *entities.Messag
 			Uint("accountID", message.AccountID).
 			Msg("Message created successfully")
 	}
-	return err
+	return result
 }
 
 func (r *messageRepository) GetByID(ctx context.Context, id uint) (*entities.Message, error) {
@@ -72,7 +72,7 @@ func (r *messageRepository) Update(ctx context.Context, message *entities.Messag
 
 	// First check if the message exists
 	var count int64
-	err := r.db.WithContext(ctx).Model(&entities.Message{}).Where("message_id = ?", message.ID).Count(&count).Error
+	err := r.db.WithContext(ctx).Model(&entities.Message{}).Where("id = ?", message.ID).Count(&count).Error
 	if err != nil {
 		config.Logger.Error().
 			Err(err).

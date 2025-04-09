@@ -4,6 +4,8 @@ import (
 	"context"
 	"errors"
 	"palm/src/entities"
+
+	"gorm.io/gorm"
 )
 
 // Common repository errors
@@ -12,7 +14,7 @@ var (
 )
 
 type RecipientRepository interface {
-	Create(ctx context.Context, recipient *entities.Recipient) error
+	Create(ctx context.Context, recipient *entities.Recipient) *gorm.DB
 	GetByMessageID(ctx context.Context, messageID uint) ([]*entities.Recipient, error)
 	DeleteByMessageID(ctx context.Context, messageID uint) error
 }

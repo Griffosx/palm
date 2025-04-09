@@ -50,13 +50,14 @@ func (s *RecipientService) CreateRecipient(ctx context.Context, recipient *entit
 		return err
 	}
 
-	if err := s.repo.Create(ctx, recipient); err != nil {
+	result := s.repo.Create(ctx, recipient)
+	if result.Error != nil {
 		config.Logger.Error().
-			Err(err).
+			Err(result.Error).
 			Uint("messageID", recipient.MessageID).
 			Str("email", recipient.Email).
 			Msg("Failed to create recipient")
-		return fmt.Errorf("failed to create recipient: %w", err)
+		return fmt.Errorf("failed to create recipient: %w", result.Error)
 	}
 
 	config.Logger.Info().

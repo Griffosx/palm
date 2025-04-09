@@ -52,13 +52,14 @@ func (s *AccountService) CreateAccount(ctx context.Context, email, accountType s
 		AccountType: accountType,
 	}
 
-	if err := s.repo.Create(ctx, account); err != nil {
+	result := s.repo.Create(ctx, account)
+	if result.Error != nil {
 		config.Logger.Error().
-			Err(err).
+			Err(result.Error).
 			Str("email", email).
 			Str("accountType", accountType).
 			Msg("Failed to create account")
-		return nil, fmt.Errorf("failed to create account: %w", err)
+		return nil, fmt.Errorf("failed to create account: %w", result.Error)
 	}
 
 	config.Logger.Info().

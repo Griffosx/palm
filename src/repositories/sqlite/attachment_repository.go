@@ -19,7 +19,7 @@ func NewAttachmentRepository(db *gorm.DB) repositories.AttachmentRepository {
 	return &attachmentRepository{db: db}
 }
 
-func (r *attachmentRepository) Create(ctx context.Context, attachment *entities.Attachment) error {
+func (r *attachmentRepository) Create(ctx context.Context, attachment *entities.Attachment) *gorm.DB {
 	config.Logger.Debug().
 		Uint("messageID", attachment.MessageID).
 		Str("filename", attachment.Filename).
@@ -27,10 +27,10 @@ func (r *attachmentRepository) Create(ctx context.Context, attachment *entities.
 		Uint("size", attachment.Size).
 		Msg("Creating new attachment")
 
-	err := r.db.WithContext(ctx).Create(attachment).Error
-	if err != nil {
+	result := r.db.WithContext(ctx).Create(attachment)
+	if result.Error != nil {
 		config.Logger.Error().
-			Err(err).
+			Err(result.Error).
 			Uint("messageID", attachment.MessageID).
 			Str("filename", attachment.Filename).
 			Msg("Failed to create attachment")
@@ -39,7 +39,7 @@ func (r *attachmentRepository) Create(ctx context.Context, attachment *entities.
 			Uint("messageID", attachment.MessageID).
 			Msg("Attachment created successfully")
 	}
-	return err
+	return result
 }
 
 func (r *attachmentRepository) GetByID(ctx context.Context, id uint) (*entities.Attachment, error) {

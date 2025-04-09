@@ -31,13 +31,14 @@ func (s *AttachmentService) CreateAttachment(ctx context.Context, attachment *en
 		Uint("size", attachment.Size).
 		Msg("Creating new attachment")
 
-	if err := s.repo.Create(ctx, attachment); err != nil {
+	result := s.repo.Create(ctx, attachment)
+	if result.Error != nil {
 		config.Logger.Error().
-			Err(err).
+			Err(result.Error).
 			Uint("messageID", attachment.MessageID).
 			Str("filename", attachment.Filename).
 			Msg("Failed to create attachment")
-		return fmt.Errorf("failed to create attachment: %w", err)
+		return fmt.Errorf("failed to create attachment: %w", result.Error)
 	}
 
 	config.Logger.Info().

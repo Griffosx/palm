@@ -49,12 +49,13 @@ func (s *MessageService) CreateMessage(ctx context.Context, message *entities.Me
 		return err
 	}
 
-	if err := s.repo.Create(ctx, message); err != nil {
+	result := s.repo.Create(ctx, message)
+	if result.Error != nil {
 		config.Logger.Error().
-			Err(err).
+			Err(result.Error).
 			Uint("accountID", message.AccountID).
 			Msg("Failed to create message")
-		return fmt.Errorf("failed to create message: %w", err)
+		return fmt.Errorf("failed to create message: %w", result.Error)
 	}
 
 	config.Logger.Info().

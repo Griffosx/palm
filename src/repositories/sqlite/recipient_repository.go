@@ -18,17 +18,17 @@ func NewRecipientRepository(db *gorm.DB) repositories.RecipientRepository {
 	return &recipientRepository{db: db}
 }
 
-func (r *recipientRepository) Create(ctx context.Context, recipient *entities.Recipient) error {
+func (r *recipientRepository) Create(ctx context.Context, recipient *entities.Recipient) *gorm.DB {
 	config.Logger.Debug().
 		Uint("messageID", recipient.MessageID).
 		Str("email", recipient.Email).
 		Str("type", string(recipient.RecipientType)).
 		Msg("Creating new recipient")
 
-	err := r.db.WithContext(ctx).Create(recipient).Error
-	if err != nil {
+	result := r.db.WithContext(ctx).Create(recipient)
+	if result.Error != nil {
 		config.Logger.Error().
-			Err(err).
+			Err(result.Error).
 			Uint("messageID", recipient.MessageID).
 			Str("email", recipient.Email).
 			Msg("Failed to create recipient")
@@ -38,7 +38,7 @@ func (r *recipientRepository) Create(ctx context.Context, recipient *entities.Re
 			Uint("messageID", recipient.MessageID).
 			Msg("Recipient created successfully")
 	}
-	return err
+	return result
 }
 
 func (r *recipientRepository) GetByMessageID(ctx context.Context, messageID uint) ([]*entities.Recipient, error) {

@@ -26,11 +26,12 @@ func TestAccountRepository_Create(t *testing.T) {
 	}
 
 	// Test
-	err := repo.Create(ctx, account)
+	result := repo.Create(ctx, account)
 
 	// Assertions
-	require.NoError(t, err)
+	require.NoError(t, result.Error)
 	assert.NotZero(t, account.ID, "ID should be assigned")
+	assert.Equal(t, int64(1), result.RowsAffected, "One row should be affected")
 }
 
 func TestAccountRepository_GetByID(t *testing.T) {
@@ -44,8 +45,8 @@ func TestAccountRepository_GetByID(t *testing.T) {
 		Email:       "test@example.com",
 		AccountType: entities.AccountTypeGoogle,
 	}
-	err := repo.Create(ctx, testAccount)
-	require.NoError(t, err)
+	result := repo.Create(ctx, testAccount)
+	require.NoError(t, result.Error)
 	require.NotZero(t, testAccount.ID)
 
 	// Test: Get existing account
@@ -73,8 +74,8 @@ func TestAccountRepository_GetByEmail(t *testing.T) {
 		Email:       "test@example.com",
 		AccountType: entities.AccountTypeMicrosoft,
 	}
-	err := repo.Create(ctx, testAccount)
-	require.NoError(t, err)
+	result := repo.Create(ctx, testAccount)
+	require.NoError(t, result.Error)
 
 	// Test: Get existing account
 	account, err := repo.GetByEmail(ctx, testAccount.Email)
@@ -101,11 +102,11 @@ func TestAccountRepository_Delete(t *testing.T) {
 		Email:       "test@example.com",
 		AccountType: entities.AccountTypeGoogle,
 	}
-	err := repo.Create(ctx, testAccount)
-	require.NoError(t, err)
+	result := repo.Create(ctx, testAccount)
+	require.NoError(t, result.Error)
 
 	// Test: Delete existing account
-	err = repo.Delete(ctx, testAccount.ID)
+	err := repo.Delete(ctx, testAccount.ID)
 	require.NoError(t, err)
 
 	// Verify deletion
@@ -134,8 +135,8 @@ func TestAccountRepository_List(t *testing.T) {
 	}
 
 	for _, acc := range accounts {
-		err := repo.Create(ctx, acc)
-		require.NoError(t, err)
+		result := repo.Create(ctx, acc)
+		require.NoError(t, result.Error)
 	}
 
 	// Test
@@ -167,16 +168,16 @@ func TestAccountRepository_UniqueEmail(t *testing.T) {
 		Email:       "duplicate@example.com",
 		AccountType: entities.AccountTypeGoogle,
 	}
-	err := repo.Create(ctx, account1)
-	require.NoError(t, err)
+	result := repo.Create(ctx, account1)
+	require.NoError(t, result.Error)
 
 	// Try to create account with same email
 	account2 := &entities.Account{
 		Email:       "duplicate@example.com",
 		AccountType: entities.AccountTypeMicrosoft,
 	}
-	err = repo.Create(ctx, account2)
+	result = repo.Create(ctx, account2)
 
 	// Should fail due to unique constraint
-	assert.Error(t, err, "Creating account with duplicate email should fail")
+	assert.Error(t, result.Error, "Creating account with duplicate email should fail")
 }

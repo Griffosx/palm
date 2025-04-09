@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	"palm/src/entities"
+	"palm/src/repositories"
 	"palm/src/repositories/sqlite"
 	"palm/tests/utils"
 	"testing"
@@ -58,8 +59,8 @@ func TestMessageRepository_Create(t *testing.T) {
 	}
 
 	// Create account via repository
-	err := accountRepo.Create(ctx, account)
-	require.NoError(t, err, "Account creation should succeed")
+	result := accountRepo.Create(ctx, account)
+	require.NoError(t, result.Error, "Account creation should succeed")
 	require.NotZero(t, account.ID, "Account ID should not be zero after creation")
 
 	// Debug: Verify account exists via repository
@@ -93,9 +94,9 @@ func TestMessageRepository_Create(t *testing.T) {
 	}
 
 	// Create message via repository
-	err = messageRepo.Create(ctx, message)
-	if err != nil {
-		t.Logf("Error creating message: %v", err)
+	result = messageRepo.Create(ctx, message)
+	if result.Error != nil {
+		t.Logf("Error creating message: %v", result.Error)
 
 		// Debug: Check if the account still exists using repository
 		checkAccount, checkErr := accountRepo.GetByID(ctx, account.ID)
@@ -106,170 +107,173 @@ func TestMessageRepository_Create(t *testing.T) {
 		}
 	}
 
-	assert.NoError(t, err)
+	assert.NoError(t, result.Error)
 	assert.NotZero(t, message.ID, "Message ID should be set after creation")
+	assert.Equal(t, int64(1), result.RowsAffected, "One row should be affected")
 }
 
-// // TestMessageRepository_GetByID tests the GetByID method
-// func TestMessageRepository_GetByID(t *testing.T) {
-// 	// Setup test database
-// 	db := utils.SetupTestDB(t)
-// 	ctx := context.Background()
+// TestMessageRepository_GetByID tests the GetByID method
+func TestMessageRepository_GetByID(t *testing.T) {
+	// Setup test database
+	db := utils.SetupTestDB(t)
+	defer utils.TeardownTestDB(t)
+	ctx := context.Background()
 
-// 	// Create test account
-// 	account := createTestAccount(t, db, "getbyid-test@example.com")
+	// Create account and message repositories
+	messageRepo := sqlite.NewMessageRepository(db)
 
-// 	// Ensure the account has a valid ID
-// 	require.NotZero(t, account.ID, "Account must have a valid ID before message creation")
+	// Create test account directly in the database
+	account := createTestAccount(t, db, "getbyid-test@example.com")
 
-// 	// Create message repository
-// 	messageRepo := sqlite.NewMessageRepository(db)
+	// Create a test message
+	subject := "Test GetByID Subject"
+	body := "Test GetByID Body"
+	senderName := "Test Sender"
+	message := &entities.Message{
+		AccountID:   account.ID,
+		Subject:     &subject,
+		Body:        &body,
+		SenderEmail: "sender@example.com",
+		SenderName:  &senderName,
+		IsDraft:     false,
+		IsRead:      false,
+		Importance:  entities.ImportanceNormal,
+	}
 
-// 	// Create a message to retrieve
-// 	subject := "Retrieve Test"
-// 	message := &entities.Message{
-// 		AccountID:   account.ID,
-// 		Subject:     &subject,
-// 		SenderEmail: "retrieve@example.com",
-// 		IsDraft:     false,
-// 		IsRead:      false,
-// 		Importance:  entities.ImportanceNormal,
-// 	}
+	// Save the message to the database
+	result := messageRepo.Create(ctx, message)
+	require.NoError(t, result.Error)
+	require.NotZero(t, message.ID)
 
-// 	err := messageRepo.Create(ctx, message)
-// 	require.NoError(t, err)
+	// Retrieve the message by ID
+	retrievedMessage, err := messageRepo.GetByID(ctx, message.ID)
 
-// 	// Test successful retrieval
-// 	t.Run("Existing message", func(t *testing.T) {
-// 		retrieved, err := messageRepo.GetByID(ctx, message.MessageID)
-// 		assert.NoError(t, err)
-// 		assert.NotNil(t, retrieved)
-// 		assert.Equal(t, message.MessageID, retrieved.MessageID)
-// 		assert.Equal(t, message.AccountID, retrieved.AccountID)
-// 		assert.Equal(t, message.SenderEmail, retrieved.SenderEmail)
-// 		assert.Equal(t, *message.Subject, *retrieved.Subject)
-// 	})
+	// Assertions
+	require.NoError(t, err)
+	require.NotNil(t, retrievedMessage)
+	assert.Equal(t, message.ID, retrievedMessage.ID)
+	assert.Equal(t, account.ID, retrievedMessage.AccountID)
+	assert.Equal(t, subject, *retrievedMessage.Subject)
+	assert.Equal(t, body, *retrievedMessage.Body)
+	assert.Equal(t, "sender@example.com", retrievedMessage.SenderEmail)
+	assert.Equal(t, senderName, *retrievedMessage.SenderName)
+	assert.Equal(t, entities.ImportanceNormal, retrievedMessage.Importance)
 
-// 	// Test non-existent message
-// 	t.Run("Non-existent message", func(t *testing.T) {
-// 		nonExistent, err := messageRepo.GetByID(ctx, 9999)
-// 		assert.Error(t, err)
-// 		assert.Equal(t, repositories.ErrMessageNotFound, err)
-// 		assert.Nil(t, nonExistent)
-// 	})
-// }
+	// Test getting a non-existent message
+	nonExistentMessage, err := messageRepo.GetByID(ctx, 9999)
+	assert.Error(t, err)
+	assert.Nil(t, nonExistentMessage)
+	assert.ErrorIs(t, err, repositories.ErrMessageNotFound)
+}
 
-// // TestMessageRepository_Update tests the Update method
-// func TestMessageRepository_Update(t *testing.T) {
-// 	// Setup test database
-// 	db := utils.SetupTestDB(t)
-// 	ctx := context.Background()
+// TestMessageRepository_Update tests the Update method
+func TestMessageRepository_Update(t *testing.T) {
+	// Setup test database
+	db := utils.SetupTestDB(t)
+	defer utils.TeardownTestDB(t)
+	ctx := context.Background()
 
-// 	// Create test account
-// 	account := createTestAccount(t, db, "update-test@example.com")
+	// Create message repository
+	messageRepo := sqlite.NewMessageRepository(db)
 
-// 	// Ensure the account has a valid ID
-// 	require.NotZero(t, account.ID, "Account must have a valid ID before message creation")
+	// Create test account
+	account := createTestAccount(t, db, "update-test@example.com")
 
-// 	// Create message repository
-// 	messageRepo := sqlite.NewMessageRepository(db)
+	// Create a test message
+	subject := "Original Subject"
+	body := "Original Body"
+	senderName := "Original Sender"
+	message := &entities.Message{
+		AccountID:   account.ID,
+		Subject:     &subject,
+		Body:        &body,
+		SenderEmail: "sender@example.com",
+		SenderName:  &senderName,
+		IsDraft:     false,
+		IsRead:      false,
+		Importance:  entities.ImportanceNormal,
+	}
 
-// 	// Test successful update
-// 	t.Run("Existing message", func(t *testing.T) {
-// 		// Create a message to update
-// 		subject := "Update Test"
-// 		message := &entities.Message{
-// 			AccountID:   account.ID,
-// 			Subject:     &subject,
-// 			SenderEmail: "update@example.com",
-// 			IsDraft:     true,
-// 			IsRead:      false,
-// 			Importance:  entities.ImportanceLow,
-// 		}
+	// Save the message to the database
+	result := messageRepo.Create(ctx, message)
+	require.NoError(t, result.Error)
+	require.NotZero(t, message.ID)
 
-// 		err := messageRepo.Create(ctx, message)
-// 		require.NoError(t, err)
+	// Update the message
+	updatedSubject := "Updated Subject"
+	updatedBody := "Updated Body"
+	message.Subject = &updatedSubject
+	message.Body = &updatedBody
+	message.IsRead = true
+	message.Importance = entities.ImportanceHigh
 
-// 		// Update the message
-// 		newSubject := "Updated Subject"
-// 		message.Subject = &newSubject
-// 		message.IsRead = true
-// 		message.Importance = entities.ImportanceHigh
+	err := messageRepo.Update(ctx, message)
+	require.NoError(t, err)
 
-// 		err = messageRepo.Update(ctx, message)
-// 		assert.NoError(t, err)
+	// Retrieve the updated message
+	updatedMessage, err := messageRepo.GetByID(ctx, message.ID)
+	require.NoError(t, err)
 
-// 		// Verify update
-// 		updated, err := messageRepo.GetByID(ctx, message.MessageID)
-// 		assert.NoError(t, err)
-// 		assert.Equal(t, newSubject, *updated.Subject)
-// 		assert.True(t, updated.IsRead)
-// 		assert.Equal(t, entities.ImportanceHigh, updated.Importance)
-// 	})
+	// Assertions
+	assert.Equal(t, updatedSubject, *updatedMessage.Subject)
+	assert.Equal(t, updatedBody, *updatedMessage.Body)
+	assert.True(t, updatedMessage.IsRead)
+	assert.Equal(t, entities.ImportanceHigh, updatedMessage.Importance)
 
-// 	// Test update with non-existent ID
-// 	t.Run("Non-existent message", func(t *testing.T) {
-// 		nonExistentMsg := &entities.Message{
-// 			MessageID:   9999,
-// 			AccountID:   account.ID,
-// 			SenderEmail: "nonexistent@example.com",
-// 			IsDraft:     false,
-// 			IsRead:      false,
-// 			Importance:  entities.ImportanceNormal,
-// 		}
+	// Test updating a non-existent message
+	nonExistentMessage := &entities.Message{
+		Model:     gorm.Model{ID: 9999},
+		AccountID: account.ID,
+		Subject:   &updatedSubject,
+		Body:      &updatedBody,
+	}
 
-// 		err := messageRepo.Update(ctx, nonExistentMsg)
-// 		assert.Error(t, err)
-// 		assert.Equal(t, repositories.ErrMessageNotFound, err)
-// 	})
-// }
+	err = messageRepo.Update(ctx, nonExistentMessage)
+	assert.Error(t, err)
+	assert.ErrorIs(t, err, repositories.ErrMessageNotFound)
+}
 
-// // TestMessageRepository_Delete tests the Delete method
-// func TestMessageRepository_Delete(t *testing.T) {
-// 	// Setup test database
-// 	db := utils.SetupTestDB(t)
-// 	ctx := context.Background()
+// TestMessageRepository_Delete tests the Delete method
+func TestMessageRepository_Delete(t *testing.T) {
+	// Setup test database
+	db := utils.SetupTestDB(t)
+	defer utils.TeardownTestDB(t)
+	ctx := context.Background()
 
-// 	// Create test account
-// 	account := createTestAccount(t, db, "delete-test@example.com")
+	// Create message repository
+	messageRepo := sqlite.NewMessageRepository(db)
 
-// 	// Ensure the account has a valid ID
-// 	require.NotZero(t, account.ID, "Account must have a valid ID before message creation")
+	// Create test account
+	account := createTestAccount(t, db, "delete-test@example.com")
 
-// 	// Create message repository
-// 	messageRepo := sqlite.NewMessageRepository(db)
+	// Create a test message
+	subject := "Delete Test Subject"
+	message := &entities.Message{
+		AccountID:   account.ID,
+		Subject:     &subject,
+		SenderEmail: "sender@example.com",
+		IsDraft:     false,
+		IsRead:      false,
+		Importance:  entities.ImportanceNormal,
+	}
 
-// 	// Test successful deletion
-// 	t.Run("Existing message", func(t *testing.T) {
-// 		// Create a message to delete
-// 		subject := "Delete Test"
-// 		message := &entities.Message{
-// 			AccountID:   account.ID,
-// 			Subject:     &subject,
-// 			SenderEmail: "delete@example.com",
-// 			IsDraft:     false,
-// 			IsRead:      false,
-// 			Importance:  entities.ImportanceNormal,
-// 		}
+	// Save the message to the database
+	result := messageRepo.Create(ctx, message)
+	require.NoError(t, result.Error)
+	require.NotZero(t, message.ID)
 
-// 		err := messageRepo.Create(ctx, message)
-// 		require.NoError(t, err)
+	// Delete the message
+	err := messageRepo.Delete(ctx, message.ID)
+	require.NoError(t, err)
 
-// 		// Delete the message
-// 		err = messageRepo.Delete(ctx, message.MessageID)
-// 		assert.NoError(t, err)
+	// Try to retrieve the deleted message
+	deletedMessage, err := messageRepo.GetByID(ctx, message.ID)
+	assert.Error(t, err)
+	assert.Nil(t, deletedMessage)
+	assert.ErrorIs(t, err, repositories.ErrMessageNotFound)
 
-// 		// Verify deletion
-// 		deleted, err := messageRepo.GetByID(ctx, message.MessageID)
-// 		assert.Error(t, err)
-// 		assert.Equal(t, repositories.ErrMessageNotFound, err)
-// 		assert.Nil(t, deleted)
-// 	})
-
-// 	// Test delete with non-existent ID
-// 	t.Run("Non-existent message", func(t *testing.T) {
-// 		err := messageRepo.Delete(ctx, 9999)
-// 		assert.Error(t, err)
-// 		assert.Equal(t, repositories.ErrMessageNotFound, err)
-// 	})
-// }
+	// Test deleting a non-existent message
+	err = messageRepo.Delete(ctx, 9999)
+	assert.Error(t, err)
+	assert.ErrorIs(t, err, repositories.ErrMessageNotFound)
+}
