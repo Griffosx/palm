@@ -2,33 +2,48 @@ version: "3"
 
 tasks:
   test:
+    desc: Run all tests without logs
+    cmds:
+      - GORM_SILENT=true go test ./tests/...
+
+  test:loud:
     desc: Run all tests
     cmds:
       - go test ./tests/... -v
 
-  test:short:
-    desc: Run tests with short flag
+  test:failures:
+    desc: Run all tests but only show failures
     cmds:
-      - go test ./tests/... -v -short
+      - go test ./tests/... | grep -A 10 -B 2 FAIL
 
-  build:
-    desc: Build the application
+  test:coverage:
+    desc: Run tests with coverage
     cmds:
-      - go build -o palm ./src
+      - go test -coverpkg=./src/... ./tests/... -coverprofile=coverage.out
+      - go tool cover -func=coverage.out
 
-  run:
+  test:coverage:html:
+    desc: Generate HTML coverage report and open it in a browser
+    cmds:
+      - go test -coverpkg=./src/... ./tests/... -coverprofile=coverage.out
+      - go tool cover -html=coverage.out -o coverage.html
+      - open coverage.html
+
+  dev:
     desc: Run the application
     cmds:
-      - go run ./src
+      - wails dev
 
   lint:
     desc: Run linters
     cmds:
       - go vet ./...
-      - golint ./...
+      - golangci-lint run ./...
 
   clean:
     desc: Clean build artifacts
     cmds:
       - rm -f palm
       - rm -f palm.db
+      - rm -f coverage.out
+      - rm -f coverage.html
