@@ -19,8 +19,9 @@ var rng = rand.New(rand.NewSource(time.Now().UnixNano()))
 // When inMemory is false, identifier can be used to specify a custom file path.
 func PalmDB(inMemory bool, identifier ...string) (*gorm.DB, error) {
 	dbPath := "palm.sqlite"
+
 	if inMemory {
-		dbName := "memdb1"
+		dbName := "memdb"
 		if len(identifier) > 0 && identifier[0] != "" {
 			// Use the provided identifier for a unique but consistent database name
 			dbName = fmt.Sprintf("memdb_%s", identifier[0])

@@ -116,7 +116,6 @@ func TestMessageRepository_Create(t *testing.T) {
 func TestMessageRepository_GetByID(t *testing.T) {
 	// Setup test database
 	db := utils.SetupTestDB(t)
-	defer utils.TeardownTestDB(t)
 	ctx := context.Background()
 
 	// Create account and message repositories
@@ -170,7 +169,6 @@ func TestMessageRepository_GetByID(t *testing.T) {
 func TestMessageRepository_Update(t *testing.T) {
 	// Setup test database
 	db := utils.SetupTestDB(t)
-	defer utils.TeardownTestDB(t)
 	ctx := context.Background()
 
 	// Create message repository
@@ -237,7 +235,6 @@ func TestMessageRepository_Update(t *testing.T) {
 func TestMessageRepository_Delete(t *testing.T) {
 	// Setup test database
 	db := utils.SetupTestDB(t)
-	defer utils.TeardownTestDB(t)
 	ctx := context.Background()
 
 	// Create message repository

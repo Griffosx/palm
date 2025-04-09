@@ -78,7 +78,6 @@ func createEmailDTO(accountID uint, subject string) *services.EmailDTO {
 // TestNewEmailService tests the creation of a new email service
 func TestNewEmailService(t *testing.T) {
 	db := utils.SetupTestDB(t)
-	defer utils.TeardownTestDB(t)
 
 	messageRepo := sqlite.NewMessageRepository(db)
 	recipientRepo := sqlite.NewRecipientRepository(db)
@@ -91,7 +90,6 @@ func TestNewEmailService(t *testing.T) {
 // TestEmailService_ValidateEmail tests the validation logic
 func TestEmailService_ValidateEmail(t *testing.T) {
 	db := utils.SetupTestDB(t)
-	defer utils.TeardownTestDB(t)
 	ctx := context.Background()
 
 	messageRepo := sqlite.NewMessageRepository(db)
@@ -158,7 +156,6 @@ func TestEmailService_ValidateEmail(t *testing.T) {
 // TestEmailService_Create tests the Create method
 func TestEmailService_Create(t *testing.T) {
 	db := utils.SetupTestDB(t)
-	defer utils.TeardownTestDB(t)
 	ctx := context.Background()
 
 	messageRepo := sqlite.NewMessageRepository(db)
@@ -200,7 +197,6 @@ func TestEmailService_Create(t *testing.T) {
 // TestEmailService_GetByID tests the GetByID method
 func TestEmailService_GetByID(t *testing.T) {
 	db := utils.SetupTestDB(t)
-	defer utils.TeardownTestDB(t)
 	ctx := context.Background()
 
 	messageRepo := sqlite.NewMessageRepository(db)
@@ -244,7 +240,6 @@ func TestEmailService_GetByID(t *testing.T) {
 // TestEmailService_List tests the List method
 func TestEmailService_List(t *testing.T) {
 	db := utils.SetupTestDB(t)
-	defer utils.TeardownTestDB(t)
 	ctx := context.Background()
 
 	messageRepo := sqlite.NewMessageRepository(db)
@@ -299,7 +294,6 @@ func TestEmailService_List(t *testing.T) {
 // TestEmailService_Delete tests the Delete method
 func TestEmailService_Delete(t *testing.T) {
 	db := utils.SetupTestDB(t)
-	defer utils.TeardownTestDB(t)
 	ctx := context.Background()
 
 	messageRepo := sqlite.NewMessageRepository(db)
@@ -359,7 +353,6 @@ func TestEmailService_Delete(t *testing.T) {
 // TestEmailService_ListCount tests the ListCount method
 func TestEmailService_ListCount(t *testing.T) {
 	db := utils.SetupTestDB(t)
-	defer utils.TeardownTestDB(t)
 	ctx := context.Background()
 
 	messageRepo := sqlite.NewMessageRepository(db)
@@ -399,7 +392,6 @@ func TestEmailService_ListCount(t *testing.T) {
 // TestEmailService_CreateWithNonExistentAccount tests creating an email with a non-existent account
 func TestEmailService_CreateWithNonExistentAccount(t *testing.T) {
 	db := utils.SetupTestDB(t)
-	defer utils.TeardownTestDB(t)
 	ctx := context.Background()
 
 	messageRepo := sqlite.NewMessageRepository(db)
