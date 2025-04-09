@@ -10,7 +10,21 @@ import (
 	"palm/src/repositories/sqlite"
 	"palm/src/services"
 	"time"
+
+	"gorm.io/gorm"
 )
+
+// AccountFixture represents an account in the fixtures
+type AccountFixture struct {
+	ID           uint           `json:"id"`
+	Email        string         `json:"email"`
+	Name         string         `json:"name"`
+	Provider     string         `json:"provider"`
+	AccessToken  string         `json:"access_token"`
+	RefreshToken string         `json:"refresh_token"`
+	TokenExpiry  string         `json:"token_expiry"`
+	Emails       []EmailFixture `json:"emails"`
+}
 
 // EmailFixture represents a single email fixture from the JSON file
 type EmailFixture struct {
@@ -82,6 +96,7 @@ func populateEmails() error {
 	}
 
 	// Initialize repositories
+	accountRepo := sqlite.NewAccountRepository(db)
 	messageRepo := sqlite.NewMessageRepository(db)
 	recipientRepo := sqlite.NewRecipientRepository(db)
 	attachmentRepo := sqlite.NewAttachmentRepository(db)
@@ -95,49 +110,97 @@ func populateEmails() error {
 	)
 
 	// Load fixture data
-	fixtures, err := loadFixtures()
+	accountFixtures, err := loadFixtures()
 	if err != nil {
 		return fmt.Errorf("failed to load fixtures: %w", err)
 	}
 
-	config.Logger.Info().Int("count", len(fixtures)).Msg("Loaded email fixtures")
+	config.Logger.Info().Int("account_count", len(accountFixtures)).Msg("Loaded account fixtures")
 
-	// Create each email fixture
+	// Create each account and its emails
 	ctx := context.Background()
-	for i, fixture := range fixtures {
-		email, err := convertFixtureToEmailDTO(fixture)
+	for i, accountFixture := range accountFixtures {
+		// Create or update account
+		account, err := convertFixtureToAccount(accountFixture)
 		if err != nil {
 			config.Logger.Error().
 				Err(err).
 				Int("index", i).
-				Msg("Failed to convert fixture to email DTO")
+				Msg("Failed to convert fixture to account")
 			continue
 		}
 
-		err = emailService.Create(ctx, email)
-		if err != nil {
-			config.Logger.Error().
-				Err(err).
-				Int("index", i).
+		// Check if account exists
+		existingAccount, err := accountRepo.GetByID(ctx, account.ID)
+		if err == nil && existingAccount != nil {
+			config.Logger.Info().
+				Uint("accountID", account.ID).
+				Str("email", account.Email).
+				Msg("Account already exists, using existing account")
+		} else {
+			// Create the account
+			result := accountRepo.Create(ctx, account)
+			if result.Error != nil {
+				config.Logger.Error().
+					Err(result.Error).
+					Int("index", i).
+					Str("email", account.Email).
+					Msg("Failed to create account from fixture")
+				continue
+			}
+			config.Logger.Info().
+				Uint("accountID", account.ID).
+				Str("email", account.Email).
+				Msg("Created account from fixture")
+		}
+
+		// Create emails for this account
+		emailCount := 0
+		for j, emailFixture := range accountFixture.Emails {
+			email, err := convertFixtureToEmailDTO(emailFixture)
+			if err != nil {
+				config.Logger.Error().
+					Err(err).
+					Int("accountIndex", i).
+					Int("emailIndex", j).
+					Msg("Failed to convert fixture to email DTO")
+				continue
+			}
+
+			err = emailService.Create(ctx, email)
+			if err != nil {
+				config.Logger.Error().
+					Err(err).
+					Int("accountIndex", i).
+					Int("emailIndex", j).
+					Uint("accountID", email.Message.AccountID).
+					Msg("Failed to create email from fixture")
+				continue
+			}
+
+			config.Logger.Info().
+				Int("accountIndex", i).
+				Int("emailIndex", j).
+				Uint("messageID", email.Message.ID).
 				Uint("accountID", email.Message.AccountID).
-				Msg("Failed to create email from fixture")
-			continue
+				Str("subject", *email.Message.Subject).
+				Msg("Created email from fixture")
+
+			emailCount++
 		}
 
 		config.Logger.Info().
-			Int("index", i).
-			Uint("messageID", email.Message.ID).
-			Uint("accountID", email.Message.AccountID).
-			Str("subject", *email.Message.Subject).
-			Msg("Created email from fixture")
+			Uint("accountID", account.ID).
+			Int("emailCount", emailCount).
+			Msg("Finished creating emails for account")
 	}
 
-	config.Logger.Info().Msg("Finished populating emails from fixtures")
+	config.Logger.Info().Msg("Finished populating accounts and emails from fixtures")
 	return nil
 }
 
-// loadFixtures loads the email fixtures from the JSON file
-func loadFixtures() ([]EmailFixture, error) {
+// loadFixtures loads the account and email fixtures from the JSON file
+func loadFixtures() ([]AccountFixture, error) {
 	// Open fixtures file
 	file, err := os.Open("scripts/assets/fixtures.json")
 	if err != nil {
@@ -146,13 +209,29 @@ func loadFixtures() ([]EmailFixture, error) {
 	defer file.Close()
 
 	// Decode JSON data
-	var fixtures []EmailFixture
+	var fixtures []AccountFixture
 	decoder := json.NewDecoder(file)
 	if err := decoder.Decode(&fixtures); err != nil {
 		return nil, fmt.Errorf("could not decode fixtures JSON: %w", err)
 	}
 
 	return fixtures, nil
+}
+
+// convertFixtureToAccount converts an account fixture to an Account entity
+func convertFixtureToAccount(fixture AccountFixture) (*entities.Account, error) {
+	// We don't need tokenExpiry as the Account entity doesn't have this field
+	// Keeping parse logic here for reference in case we need to add this field in future
+
+	account := &entities.Account{
+		Model: gorm.Model{
+			ID: fixture.ID,
+		},
+		Email:       fixture.Email,
+		AccountType: fixture.Provider,
+	}
+
+	return account, nil
 }
 
 // convertFixtureToEmailDTO converts a fixture to an EmailDTO

@@ -1,92 +1,872 @@
 [
   {
-    "account_id": 1,
-    "message": {
-      "subject": "Welcome to Palm Email Client",
-      "body": "<h1>Welcome to Palm!</h1><p>This is a sample email created by the fixture utility.</p>",
-      "body_preview": "Welcome to Palm! This is a sample email created by the fixture utility.",
-      "sender_email": "noreply@palm.example.com",
-      "sender_name": "Palm Support Team",
-      "received_datetime": "2023-05-15T10:15:30Z",
-      "sent_datetime": "2023-05-15T10:15:00Z",
-      "is_draft": false,
-      "is_read": false,
-      "importance": "Normal",
-      "conversation_id": "conv-123456"
-    },
-    "recipients": [
+    "id": 1,
+    "email": "mario.rossi@travelagency.example.com",
+    "name": "Mario Rossi",
+    "provider": "Google",
+    "emails": [
       {
-        "email": "user@example.com",
-        "name": "Test User",
-        "recipient_type": "To"
+        "account_id": 1,
+        "message": {
+          "subject": "Urgent: Issues with Client Booking - Ref #AB12345",
+          "body": "<html><body><p>Dear [Account Manager Name],</p><p>I'm contacting you regarding a major issue with a client booking (Ref #AB12345) for Mrs. Eleanor Vance. She booked a premium package to the Maldives and is currently experiencing significant problems with her hotel.</p><p>She's reporting that the room is not as described in the brochure (smaller, no ocean view), the air conditioning is broken, and the promised 'private beach access' is shared with other guests. She's extremely unhappy and threatening to leave the resort immediately.</p><p>This is a high-value client, and we need to resolve this issue ASAP to prevent further escalation. Please contact the hotel management immediately to investigate and offer a suitable solution (e.g., upgrade to a better room, compensation for the inconvenience).</p><p>Let me know what steps you're taking to rectify the situation.</p><p>Thanks,<br>John Smith<br>Customer Service Supervisor</p></body></html>",
+          "body_preview": "Urgent: Issues with Client Booking - Ref #AB12345. Dear [Account Manager Name], I'm contacting you regarding a major issue with a client booking (Ref #AB12345) for Mrs. Eleanor Vance. She booked a premium package to the Maldives...",
+          "sender_email": "john.smith@travelagency.example.com",
+          "sender_name": "John Smith",
+          "received_datetime": "2024-01-26T08:00:00Z",
+          "sent_datetime": "2024-01-26T07:55:00Z",
+          "is_draft": false,
+          "is_read": false,
+          "importance": "High",
+          "conversation_id": "vance-complaint-987"
+        },
+        "recipients": [
+          {
+            "email": "mario.rossi@travelagency.example.com",
+            "name": "Mario Rossi",
+            "recipient_type": "To"
+          }
+        ],
+        "attachments": []
       },
       {
-        "email": "admin@example.com",
-        "name": "Admin User",
-        "recipient_type": "Cc"
-      }
-    ],
-    "attachments": [
+        "account_id": 1,
+        "message": {
+          "subject": "RE: Urgent: Issues with Client Booking - Ref #AB12345",
+          "body": "<html><body><p>Dear John,</p><p>Thanks for flagging this immediately. I've just contacted the hotel management in the Maldives and am currently on a call with them to discuss Mrs. Vance's issues.</p><p>They are claiming that there was a misunderstanding regarding the room type and are offering an upgrade to a suite with a private balcony and direct beach access. They are also offering a complimentary spa treatment and a bottle of champagne as compensation.</p><p>I'm waiting to hear back from Mrs. Vance to confirm if this resolution is acceptable to her. I'll keep you updated on the outcome.</p><p>In the meantime, could you please pull up all the details of Mrs. Vance's booking, including the original room description and any promises made in the booking confirmation? This will help me negotiate further if needed.</p><p>Best Regards,<br>[Account Manager Name]</p></body></html>",
+          "body_preview": "RE: Urgent: Issues with Client Booking - Ref #AB12345. Dear John, Thanks for flagging this immediately. I've just contacted the hotel management in the Maldives and am currently on a call with them to discuss Mrs. Vance's issues.",
+          "sender_email": "mario.rossi@travelagency.example.com",
+          "sender_name": "Mario Rossi",
+          "received_datetime": "2024-01-26T09:15:00Z",
+          "sent_datetime": "2024-01-26T09:10:00Z",
+          "is_draft": false,
+          "is_read": true,
+          "importance": "High",
+          "conversation_id": "vance-complaint-987"
+        },
+        "recipients": [
+          {
+            "email": "john.smith@travelagency.example.com",
+            "name": "John Smith",
+            "recipient_type": "To"
+          }
+        ],
+        "attachments": []
+      },
       {
-        "filename": "welcome.pdf",
-        "mime_type": "application/pdf",
-        "size": 102400,
-        "local_path": "/tmp/welcome.pdf"
-      }
-    ]
-  },
-  {
-    "account_id": 1,
-    "message": {
-      "subject": "Your Weekly Summary",
-      "body": "<h2>Weekly Summary</h2><p>Here is your activity summary for the past week.</p>",
-      "body_preview": "Weekly Summary. Here is your activity summary for the past week.",
-      "sender_email": "updates@palm.example.com",
-      "sender_name": "Palm Updates",
-      "received_datetime": "2023-05-16T09:00:00Z",
-      "sent_datetime": "2023-05-16T08:55:00Z",
-      "is_draft": false,
-      "is_read": true,
-      "importance": "Normal",
-      "conversation_id": "conv-234567"
-    },
-    "recipients": [
+        "account_id": 1,
+        "message": {
+          "subject": "RE: Urgent: Issues with Client Booking - Ref #AB12345",
+          "body": "<html><body><p>Dear [Account Manager Name],</p><p>Good to hear you are on top of it.</p><p>I have checked Mrs Vance's details, and I am attaching the original booking to this email.</p><p>Let me know if there is anything else I can help you with.</p><p>Thanks,<br>John Smith<br>Customer Service Supervisor</p></body></html>",
+          "body_preview": "RE: Urgent: Issues with Client Booking - Ref #AB12345. Good to hear you are on top of it.",
+          "sender_email": "john.smith@travelagency.example.com",
+          "sender_name": "John Smith",
+          "received_datetime": "2024-01-26T10:00:00Z",
+          "sent_datetime": "2024-01-26T09:55:00Z",
+          "is_draft": false,
+          "is_read": true,
+          "importance": "High",
+          "conversation_id": "vance-complaint-987"
+        },
+        "recipients": [
+          {
+            "email": "mario.rossi@travelagency.example.com",
+            "name": "Mario Rossi",
+            "recipient_type": "To"
+          }
+        ],
+        "attachments": [
+          {
+            "filename": "Vance_BookingDetails_AB12345.pdf",
+            "mime_type": "application/pdf",
+            "size": 204800,
+            "local_path": "/tmp/Vance_BookingDetails.pdf"
+          }
+        ]
+      },
       {
-        "email": "user@example.com",
-        "name": "Test User",
-        "recipient_type": "To"
-      }
-    ],
-    "attachments": []
-  },
-  {
-    "account_id": 1,
-    "message": {
-      "subject": "Important Action Required",
-      "body": "<h1>Action Required</h1><p>Please verify your account within 24 hours.</p>",
-      "body_preview": "Action Required. Please verify your account within 24 hours.",
-      "sender_email": "security@palm.example.com",
-      "sender_name": "Palm Security",
-      "received_datetime": "2023-05-17T14:30:00Z",
-      "sent_datetime": "2023-05-17T14:25:00Z",
-      "is_draft": false,
-      "is_read": false,
-      "importance": "High",
-      "conversation_id": "conv-345678"
-    },
-    "recipients": [
+        "account_id": 1,
+        "message": {
+          "subject": "RE: Urgent: Issues with Client Booking - Ref #AB12345 - RESOLVED",
+          "body": "<html><body><p>Dear John,</p><p>Great news! I've spoken with Mrs. Vance, and she has accepted the hotel's offer of a suite upgrade, spa treatment, and champagne.</p><p>She's expressed her gratitude for our prompt action in resolving the issue. She's now looking forward to enjoying the rest of her vacation.</p><p>Thanks for your quick assistance in providing the booking details. This case is now closed.</p><p>Best Regards,<br>[Account Manager Name]</p></body></html>",
+          "body_preview": "RE: Urgent: Issues with Client Booking - Ref #AB12345 - RESOLVED. Dear John, Great news! I've spoken with Mrs. Vance, and she has accepted the hotel's offer of a suite upgrade, spa treatment, and champagne.",
+          "sender_email": "mario.rossi@travelagency.example.com",
+          "sender_name": "Mario Rossi",
+          "received_datetime": "2024-01-26T11:30:00Z",
+          "sent_datetime": "2024-01-26T11:25:00Z",
+          "is_draft": false,
+          "is_read": true,
+          "importance": "Normal",
+          "conversation_id": "vance-complaint-987"
+        },
+        "recipients": [
+          {
+            "email": "john.smith@travelagency.example.com",
+            "name": "John Smith",
+            "recipient_type": "To"
+          }
+        ],
+        "attachments": []
+      },
       {
-        "email": "user@example.com",
-        "name": "Test User",
-        "recipient_type": "To"
-      }
-    ],
-    "attachments": [
+        "account_id": 1,
+        "message": {
+          "subject": "Potential Partnership Opportunity - Eco-Tourism in Costa Rica",
+          "body": "<html><body><p>Dear [Potential Partner Contact Name],</p><p>My name is [Account Manager Name] from [Travel Agency Name]. We are a leading travel agency specializing in curated and bespoke travel experiences for discerning clients.</p><p>We've been closely following the developments at [Partner Company Name] and are particularly impressed with your commitment to sustainable tourism practices in Costa Rica. We believe that your dedication to responsible travel aligns perfectly with our company values and the growing demand from our clientele for authentic and environmentally conscious travel options.</p><p>Specifically, we are interested in exploring a potential partnership that would allow us to offer our clients access to your eco-lodges and unique experiences in Costa Rica. Our clients are typically interested in immersive cultural experiences, wildlife observation, and adventure activities, all while minimizing their environmental impact.</p><p>I've attached a brief overview of our company and target demographic for your review. Would you be available for a brief call sometime next week to discuss this opportunity further? I am available on Tuesday afternoon or Wednesday morning. Please let me know what works best for you.</p><p>Thank you for your time and consideration.</p><p>Sincerely,<br>[Account Manager Name]<br>[Travel Agency Name]<br>[Contact Information]</p></body></html>",
+          "body_preview": "Potential Partnership Opportunity - Eco-Tourism in Costa Rica. Dear [Potential Partner Contact Name], My name is [Account Manager Name] from [Travel Agency Name]. We are a leading travel agency specializing in curated and bespoke travel experiences...",
+          "sender_email": "mario.rossi@travelagency.example.com",
+          "sender_name": "Mario Rossi",
+          "received_datetime": "2024-01-29T14:00:00Z",
+          "sent_datetime": "2024-01-29T13:55:00Z",
+          "is_draft": false,
+          "is_read": false,
+          "importance": "Normal",
+          "conversation_id": "costa-rica-partnership-001"
+        },
+        "recipients": [
+          {
+            "email": "info@ecolodgecostarica.example.com",
+            "name": "[Potential Partner Contact Name]",
+            "recipient_type": "To"
+          }
+        ],
+        "attachments": [
+          {
+            "filename": "TravelAgency_Profile.pdf",
+            "mime_type": "application/pdf",
+            "size": 307200,
+            "local_path": "/tmp/TravelAgency_Profile.pdf"
+          }
+        ]
+      },
       {
-        "filename": "security_steps.docx",
-        "mime_type": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
-        "size": 35840,
-        "local_path": "/tmp/security_steps.docx"
+        "account_id": 1,
+        "message": {
+          "subject": "RE: Potential Partnership Opportunity - Eco-Tourism in Costa Rica",
+          "body": "<html><body><p>Dear Mario,</p><p>Thank you for reaching out and for your interest in partnering with [Partner Company Name]. We are always looking for new avenues to expand our reach and connect with travelers who value sustainable tourism.</p><p>I have reviewed the attached company profile, and I'm impressed with [Travel Agency Name]'s commitment to quality and customer satisfaction.</p><p>I am available for a call on Wednesday morning at 9:00 AM Costa Rican time (which I believe is the same as your local time). Please let me know if that works for you. If not, suggest an alternative time.</p><p>Looking forward to discussing this further!</p><p>Best Regards,<br>[Partner Contact Name]<br>CEO, [Partner Company Name]</p></body></html>",
+          "body_preview": "RE: Potential Partnership Opportunity - Eco-Tourism in Costa Rica. Dear Mario, Thank you for reaching out and for your interest in partnering with [Partner Company Name]. We are always looking for new avenues to expand our reach and...",
+          "sender_email": "info@ecolodgecostarica.example.com",
+          "sender_name": "[Partner Contact Name]",
+          "received_datetime": "2024-01-29T16:30:00Z",
+          "sent_datetime": "2024-01-29T16:25:00Z",
+          "is_draft": false,
+          "is_read": true,
+          "importance": "Normal",
+          "conversation_id": "costa-rica-partnership-001"
+        },
+        "recipients": [
+          {
+            "email": "mario.rossi@travelagency.example.com",
+            "name": "Mario Rossi",
+            "recipient_type": "To"
+          }
+        ],
+        "attachments": []
+      },
+      {
+        "account_id": 1,
+        "message": {
+          "subject": "RE: Potential Partnership Opportunity - Eco-Tourism in Costa Rica",
+          "body": "<html><body><p>Dear [Partner Contact Name],</p><p>That sounds perfect! Wednesday at 9:00 AM your time works well for me.</p><p>I appreciate you taking the time to discuss this potential partnership. I'm excited to learn more about [Partner Company Name] and explore how we can work together to offer our clients unforgettable and sustainable travel experiences in Costa Rica.</p><p>I will call you then. Here is my direct line: +1-555-123-4567</p><p>Best Regards,<br>Mario Rossi</p></body></html>",
+          "body_preview": "RE: Potential Partnership Opportunity - Eco-Tourism in Costa Rica. Dear [Partner Contact Name], That sounds perfect! Wednesday at 9:00 AM your time works well for me.",
+          "sender_email": "mario.rossi@travelagency.example.com",
+          "sender_name": "Mario Rossi",
+          "received_datetime": "2024-01-29T17:00:00Z",
+          "sent_datetime": "2024-01-29T16:55:00Z",
+          "is_draft": false,
+          "is_read": false,
+          "importance": "Normal",
+          "conversation_id": "costa-rica-partnership-001"
+        },
+        "recipients": [
+          {
+            "email": "info@ecolodgecostarica.example.com",
+            "name": "[Partner Contact Name]",
+            "recipient_type": "To"
+          }
+        ],
+        "attachments": []
+      },
+      {
+        "account_id": 1,
+        "message": {
+          "subject": "Follow-up: Costa Rica Partnership Discussion",
+          "body": "<html><body><p>Dear Elena Rodriguez,</p><p>It was a pleasure speaking with you yesterday. I truly enjoyed learning more about EcoLodge Costa Rica's incredible work in sustainable tourism in Costa Rica.</p><p>As we discussed, I'm particularly excited about the possibility of offering our clients access to your unique eco-lodges and curated experiences. I believe this partnership would be mutually beneficial, allowing us to expand our reach to environmentally conscious travelers while providing EcoLodge Costa Rica with increased exposure and bookings.</p><p>Following our conversation, I've drafted a preliminary partnership proposal outlining key aspects such as commission structure, marketing initiatives, and exclusivity agreements.  I've attached this proposal for your review.  Please take your time to go through it and let me know if you have any questions or would like to discuss any modifications.</p><p>I'm also happy to schedule another call next week to delve deeper into the proposal and address any concerns you may have. Please let me know what day works for you.</p><p>Thank you again for your time and consideration. I look forward to hearing from you soon.</p><p>Best Regards,<br>Mario Rossi<br>[Travel Agency Name]</p></body></html>",
+          "body_preview": "Follow-up: Costa Rica Partnership Discussion. Dear Elena Rodriguez, It was a pleasure speaking with you yesterday. I truly enjoyed learning more about EcoLodge Costa Rica's incredible work in sustainable tourism in Costa Rica.",
+          "sender_email": "mario.rossi@travelagency.example.com",
+          "sender_name": "Mario Rossi",
+          "received_datetime": "2024-01-31T14:00:00Z",
+          "sent_datetime": "2024-01-31T13:55:00Z",
+          "is_draft": false,
+          "is_read": false,
+          "importance": "Normal",
+          "conversation_id": "costa-rica-partnership-001"
+        },
+        "recipients": [
+          {
+            "email": "elena.rodriguez@ecolodgecostarica.example.com",
+            "name": "Elena Rodriguez",
+            "recipient_type": "To"
+          }
+        ],
+        "attachments": [
+          {
+            "filename": "Partnership_Proposal_CostaRica.pdf",
+            "mime_type": "application/pdf",
+            "size": 409600,
+            "local_path": "/tmp/Partnership_Proposal_CostaRica.pdf"
+          }
+        ]
+      },
+      {
+        "account_id": 1,
+        "message": {
+          "subject": "RE: Follow-up: Costa Rica Partnership Discussion",
+          "body": "<html><body><p>Dear Mario,</p><p>Thank you for the follow-up and for sending the partnership proposal. I've had a chance to review it and it looks very promising.</p><p>Overall, I'm very pleased with the terms outlined in the proposal. The commission structure seems fair, and I appreciate the marketing initiatives you've suggested. We especially like the idea of featuring our eco-lodges in your exclusive client newsletter.</p><p>Regarding exclusivity, we'd like to discuss this further. While we're open to offering preferential treatment to [Travel Agency Name], we're hesitant to commit to complete exclusivity at this stage. Perhaps we could explore a tiered approach, where exclusivity is granted based on achieving certain booking targets?</p><p>I'm available for a call next Tuesday afternoon at 2:00 PM Costa Rican time to discuss this and any other questions you may have.</p><p>Looking forward to connecting again.</p><p>Best Regards,<br>Elena Rodriguez<br>CEO, EcoLodge Costa Rica</p></body></html>",
+          "body_preview": "RE: Follow-up: Costa Rica Partnership Discussion. Dear Mario, Thank you for the follow-up and for sending the partnership proposal. I've had a chance to review it and it looks very promising.",
+          "sender_email": "elena.rodriguez@ecolodgecostarica.example.com",
+          "sender_name": "Elena Rodriguez",
+          "received_datetime": "2024-02-01T10:00:00Z",
+          "sent_datetime": "2024-02-01T09:55:00Z",
+          "is_draft": false,
+          "is_read": true,
+          "importance": "Normal",
+          "conversation_id": "costa-rica-partnership-001"
+        },
+        "recipients": [
+          {
+            "email": "mario.rossi@travelagency.example.com",
+            "name": "Mario Rossi",
+            "recipient_type": "To"
+          }
+        ],
+        "attachments": []
+      },
+      {
+        "account_id": 1,
+        "message": {
+          "subject": "RE: Follow-up: Costa Rica Partnership Discussion",
+          "body": "<html><body><p>Dear Elena,</p><p>Thank you for your prompt response and thoughtful feedback on the partnership proposal. I'm thrilled to hear that you're generally pleased with the terms outlined.</p><p>I completely understand your hesitation regarding complete exclusivity at this stage. A tiered approach based on booking targets sounds like a very reasonable compromise, and I'm happy to explore that further.</p><p>Tuesday afternoon at 2:00 PM Costa Rican time works perfectly for me. I've marked it in my calendar.</p><p>In the meantime, could you perhaps provide some insights into the booking targets you would consider reasonable for different tiers of exclusivity? This will help me prepare some specific options for our discussion next week.</p><p>Thank you again for your willingness to collaborate. I'm confident that we can reach an agreement that is mutually beneficial and paves the way for a successful partnership.</p><p>Best Regards,<br>Mario Rossi</p></body></html>",
+          "body_preview": "RE: Follow-up: Costa Rica Partnership Discussion. Dear Elena, Thank you for your prompt response and thoughtful feedback on the partnership proposal. I'm thrilled to hear that you're generally pleased with the terms outlined.",
+          "sender_email": "mario.rossi@travelagency.example.com",
+          "sender_name": "Mario Rossi",
+          "received_datetime": "2024-02-01T11:00:00Z",
+          "sent_datetime": "2024-02-01T10:55:00Z",
+          "is_draft": false,
+          "is_read": false,
+          "importance": "Normal",
+          "conversation_id": "costa-rica-partnership-001"
+        },
+        "recipients": [
+          {
+            "email": "elena.rodriguez@ecolodgecostarica.example.com",
+            "name": "Elena Rodriguez",
+            "recipient_type": "To"
+          }
+        ],
+        "attachments": []
+      },
+      {
+        "account_id": 1,
+        "message": {
+          "subject": "Preparing for Our Call - Tiered Exclusivity Booking Targets",
+          "body": "<html><body><p>Dear Elena,</p><p>Hope you are having a great week!</p><p>As we prepare for our call next Tuesday regarding the partnership proposal, I wanted to share some preliminary ideas for tiered exclusivity booking targets based on our internal sales data and projected growth in eco-tourism.</p><p>Here are a few options we could discuss:</p><ul><li><strong>Bronze Tier:</strong> Guarantee of [Number] bookings per quarter. Benefits include prominent placement on our website's 'Sustainable Travel' section and inclusion in our monthly newsletter.</li><li><strong>Silver Tier:</strong> Guarantee of [Larger Number] bookings per quarter. Benefits include all Bronze Tier benefits, plus dedicated social media promotion and inclusion in our curated 'Eco-Adventure' package offerings.</li><li><strong>Gold Tier:</strong> Guarantee of [Even Larger Number] bookings per quarter. Benefits include all Silver Tier benefits, plus a dedicated landing page on our website, featured placement in our print brochures, and exclusive access to our high-value 'Concierge' clients.</li></ul><p>These are just initial suggestions, and we can certainly adjust the booking numbers and benefits to align with your specific goals and expectations. We are very flexible.</p><p>I'm also open to discussing alternative metrics for measuring success, such as revenue generated or the average length of stay.</p><p>Please feel free to review these options and share any thoughts or suggestions you may have before our call.  I'm looking forward to a productive discussion!</p><p>Best Regards,<br>Mario Rossi</p></body></html>",
+          "body_preview": "Preparing for Our Call - Tiered Exclusivity Booking Targets. Dear Elena, Hope you are having a great week! As we prepare for our call next Tuesday regarding the partnership proposal, I wanted to share some preliminary ideas for tiered exclusivity booking...",
+          "sender_email": "mario.rossi@travelagency.example.com",
+          "sender_name": "Mario Rossi",
+          "received_datetime": "2024-02-02T14:00:00Z",
+          "sent_datetime": "2024-02-02T13:55:00Z",
+          "is_draft": false,
+          "is_read": false,
+          "importance": "Normal",
+          "conversation_id": "costa-rica-partnership-001"
+        },
+        "recipients": [
+          {
+            "email": "elena.rodriguez@ecolodgecostarica.example.com",
+            "name": "Elena Rodriguez",
+            "recipient_type": "To"
+          }
+        ],
+        "attachments": []
+      },
+      {
+        "account_id": 1,
+        "message": {
+          "subject": "RE: Preparing for Our Call - Tiered Exclusivity Booking Targets",
+          "body": "<html><body><p>Dear Mario,</p><p>Thank you for sending these tiered exclusivity options. This is very helpful and gives us a good starting point for our discussion next week. I appreciate you taking the time to prepare these preliminary ideas.</p><p>I think the Bronze, Silver, and Gold tiers are a good framework. The benefits associated with each tier seem appropriate. We will need to look at the booking numbers you propose and compare them with our existing occupancy rates and marketing goals.  We also need to factor in seasonality, as some months are naturally busier than others.</p><p>Before Tuesday, I'll gather our internal data on booking patterns and optimal occupancy rates. We can then discuss whether the proposed booking targets are realistic and sustainable for both of us.</p><p>One thing I'd like to add to the discussion is the possibility of a 'Platinum' tier for exceeding even the Gold tier targets. This could include benefits like a co-branded marketing campaign and a joint press release.</p><p>Looking forward to our call on Tuesday!</p><p>Best Regards,<br>Elena Rodriguez<br>CEO, EcoLodge Costa Rica</p></body></html>",
+          "body_preview": "RE: Preparing for Our Call - Tiered Exclusivity Booking Targets. Dear Mario, Thank you for sending these tiered exclusivity options. This is very helpful and gives us a good starting point for our discussion next week. I appreciate you taking...",
+          "sender_email": "elena.rodriguez@ecolodgecostarica.example.com",
+          "sender_name": "Elena Rodriguez",
+          "received_datetime": "2024-02-02T16:30:00Z",
+          "sent_datetime": "2024-02-02T16:25:00Z",
+          "is_draft": false,
+          "is_read": true,
+          "importance": "Normal",
+          "conversation_id": "costa-rica-partnership-001"
+        },
+        "recipients": [
+          {
+            "email": "mario.rossi@travelagency.example.com",
+            "name": "Mario Rossi",
+            "recipient_type": "To"
+          }
+        ],
+        "attachments": []
+      },
+      {
+        "account_id": 1,
+        "message": {
+          "subject": "RE: Preparing for Our Call - Tiered Exclusivity Booking Targets",
+          "body": "<html><body><p>Dear Elena,</p><p>Excellent!  I'm glad you found the tiered options helpful.  Your feedback about seasonality is spot-on, and we can definitely factor that into the targets. We can also explore adjusting the targets quarterly based on historical data and projected trends.</p><p>I love the idea of a 'Platinum' tier! A co-branded marketing campaign and joint press release would be fantastic additions. Let's definitely discuss the specific requirements and benefits for that tier during our call.</p><p>I look forward to hearing about the data you gather on booking patterns and optimal occupancy rates. This will be crucial in ensuring that the targets are both ambitious and achievable.</p><p>See you on Tuesday!</p><p>Best Regards,<br>Mario Rossi</p></body></html>",
+          "body_preview": "RE: Preparing for Our Call - Tiered Exclusivity Booking Targets. Dear Elena, Excellent! I'm glad you found the tiered options helpful. Your feedback about seasonality is spot-on, and we can definitely factor that into the targets. We can also...",
+          "sender_email": "mario.rossi@travelagency.example.com",
+          "sender_name": "Mario Rossi",
+          "received_datetime": "2024-02-02T17:00:00Z",
+          "sent_datetime": "2024-02-02T16:55:00Z",
+          "is_draft": false,
+          "is_read": false,
+          "importance": "Normal",
+          "conversation_id": "costa-rica-partnership-001"
+        },
+        "recipients": [
+          {
+            "email": "elena.rodriguez@ecolodgecostarica.example.com",
+            "name": "Elena Rodriguez",
+            "recipient_type": "To"
+          }
+        ],
+        "attachments": []
+      },
+      {
+        "account_id": 1,
+        "message": {
+          "subject": "Confirmed: Meeting Follow-up & Revised Partnership Proposal",
+          "body": "<html><body><p>Dear Elena,</p><p>Thank you again for the productive call yesterday. I found our discussion about the tiered exclusivity, booking targets, and the exciting addition of the Platinum tier incredibly insightful. I believe we are very close to finalizing a partnership agreement that will be highly beneficial for both EcoLodge Costa Rica and [Travel Agency Name].</p><p>Based on our conversation, I've revised the partnership proposal to reflect the agreed-upon booking targets for each tier (Bronze: [agreed_bronze_number], Silver: [agreed_silver_number], Gold: [agreed_gold_number], and Platinum: [agreed_platinum_number]) and have outlined the specific benefits associated with each tier, including the co-branded marketing campaign and joint press release for the Platinum level.</p><p>I have attached the revised proposal for your final review. Please take your time to go through it, and let me know if you have any further questions or require any adjustments.</p><p>Assuming the revised proposal meets with your approval, we can then move forward with signing the agreement and officially launching our partnership! I am very excited to begin working together.</p><p>Please let me know if you would like to schedule a brief follow-up call to discuss anything further. Otherwise, I look forward to receiving your confirmation.</p><p>Best Regards,<br>Mario Rossi</p></body></html>",
+          "body_preview": "Confirmed: Meeting Follow-up & Revised Partnership Proposal. Dear Elena, Thank you again for the productive call yesterday. I found our discussion about the tiered exclusivity, booking targets, and the exciting addition of the Platinum tier incredibly...",
+          "sender_email": "mario.rossi@travelagency.example.com",
+          "sender_name": "Mario Rossi",
+          "received_datetime": "2024-02-07T14:00:00Z",
+          "sent_datetime": "2024-02-07T13:55:00Z",
+          "is_draft": false,
+          "is_read": false,
+          "importance": "Normal",
+          "conversation_id": "costa-rica-partnership-001"
+        },
+        "recipients": [
+          {
+            "email": "elena.rodriguez@ecolodgecostarica.example.com",
+            "name": "Elena Rodriguez",
+            "recipient_type": "To"
+          }
+        ],
+        "attachments": [
+          {
+            "filename": "Revised_Partnership_Proposal_CostaRica.pdf",
+            "mime_type": "application/pdf",
+            "size": 460800,
+            "local_path": "/tmp/Revised_Partnership_Proposal_CostaRica.pdf"
+          }
+        ]
+      },
+      {
+        "account_id": 1,
+        "message": {
+          "subject": "RE: Confirmed: Meeting Follow-up & Revised Partnership Proposal - APPROVED!",
+          "body": "<html><body><p>Dear Mario,</p><p>I am delighted to confirm that we have reviewed the revised partnership proposal and are fully on board! The adjusted booking targets for each tier seem realistic and achievable, and we are thrilled with the inclusion of the co-branded marketing campaign and joint press release for the Platinum tier. Everything looks fantastic.</p><p>Please send over the final agreement, and we will sign it promptly. We are incredibly excited to officially partner with [Travel Agency Name] and begin offering our unique eco-lodges and experiences to your discerning clientele.</p><p>Thank you for your professionalism, responsiveness, and collaborative spirit throughout this process. We believe this partnership will be a tremendous success for both of our organizations.</p><p>Looking forward to a long and fruitful collaboration!</p><p>Best Regards,<br>Elena Rodriguez<br>CEO, EcoLodge Costa Rica</p></body></html>",
+          "body_preview": "RE: Confirmed: Meeting Follow-up & Revised Partnership Proposal - APPROVED! Dear Mario, I am delighted to confirm that we have reviewed the revised partnership proposal and are fully on board! The adjusted booking targets for each tier seem realistic and...",
+          "sender_email": "elena.rodriguez@ecolodgecostarica.example.com",
+          "sender_name": "Elena Rodriguez",
+          "received_datetime": "2024-02-07T16:30:00Z",
+          "sent_datetime": "2024-02-07T16:25:00Z",
+          "is_draft": false,
+          "is_read": true,
+          "importance": "High",
+          "conversation_id": "costa-rica-partnership-001"
+        },
+        "recipients": [
+          {
+            "email": "mario.rossi@travelagency.example.com",
+            "name": "Mario Rossi",
+            "recipient_type": "To"
+          }
+        ],
+        "attachments": []
+      },
+      {
+        "account_id": 1,
+        "message": {
+          "subject": "RE: Confirmed: Meeting Follow-up & Revised Partnership Proposal - APPROVED!",
+          "body": "<html><body><p>Dear Elena,</p><p>This is fantastic news! I am absolutely thrilled to hear that you have approved the revised proposal. </p><p>I will send over the final agreement document within the hour for your signature. We are just as excited to embark on this partnership with EcoLodge Costa Rica. Thank you for your kind words and for recognizing the collaborative spirit. I truly believe that together, we will create exceptional and sustainable travel experiences for our clients.</p><p>Once we have the signed agreement, we can begin planning the initial marketing initiatives and onboarding EcoLodge Costa Rica onto our booking platform. I'll be in touch shortly with a timeline for these next steps. Let's make this a grand success!</p><p>Best Regards,<br>Mario Rossi</p></body></html>",
+          "body_preview": "RE: Confirmed: Meeting Follow-up & Revised Partnership Proposal - APPROVED! Dear Elena, This is fantastic news! I am absolutely thrilled to hear that you have approved the revised proposal. ",
+          "sender_email": "mario.rossi@travelagency.example.com",
+          "sender_name": "Mario Rossi",
+          "received_datetime": "2024-02-07T17:00:00Z",
+          "sent_datetime": "2024-02-07T16:55:00Z",
+          "is_draft": false,
+          "is_read": false,
+          "importance": "High",
+          "conversation_id": "costa-rica-partnership-001"
+        },
+        "recipients": [
+          {
+            "email": "elena.rodriguez@ecolodgecostarica.example.com",
+            "name": "Elena Rodriguez",
+            "recipient_type": "To"
+          }
+        ],
+        "attachments": []
+      },
+      {
+        "account_id": 1,
+        "message": {
+          "subject": "Re: RE: Urgent: Issues with Client Booking - Ref #AB12345 - Post-Mortem (sort of)",
+          "body": "<html><body><p>Subject: RE: Urgent: Issues with Client Booking - Ref #AB12345 - Post-Mortem (sort of)</p><p>Hey John (aka 'Sparky' - for sparking the initial fire!),</p><p>Glad that's all wrapped up. Eleanor 'Queen Diva' Vance is happy now, and frankly, so am I. You wouldn't BELIEVE what it took to appease her. I swear she wanted a pony at one point.</p><p>Turns out, the hotel manager there, a guy named 'Sunny Beaches' (I'm serious, that's what he told me to call him), was trying to pull a fast one with the room descriptions. Lucky for us, they caved pretty quickly. Good thing, I was about to unleash the fury of a thousand suns. </p><p>Thanks again for the booking deets, Sparky. You're a lifesaver. Now, if you'll excuse me, I need a triple espresso and a stress ball the size of my head.</p><p>Cheers,<br>Mario 'The Fixer' Rossi </p></body></html>",
+          "body_preview": "Re: RE: Urgent: Issues with Client Booking - Ref #AB12345 - Post-Mortem (sort of). Subject: RE: Urgent: Issues with Client Booking - Ref #AB12345 - Post-Mortem (sort of) Hey John (aka 'Sparky' - for sparking the initial fire!), Glad that's all wrapped up. Eleanor 'Queen Diva' Vance is happy now, and frankly, so am I...",
+          "sender_email": "mario.rossi@travelagency.example.com",
+          "sender_name": "Mario Rossi",
+          "received_datetime": "2024-01-26T12:00:00Z",
+          "sent_datetime": "2024-01-26T11:55:00Z",
+          "is_draft": false,
+          "is_read": false,
+          "importance": "Normal",
+          "conversation_id": "vance-complaint-987"
+        },
+        "recipients": [
+          {
+            "email": "john.smith@travelagency.example.com",
+            "name": "John Smith",
+            "recipient_type": "To"
+          }
+        ],
+        "attachments": []
+      },
+      {
+        "account_id": 1,
+        "message": {
+          "subject": "RE: Re: RE: Urgent: Issues with Client Booking - Ref #AB12345 - Post-Mortem (sort of)",
+          "body": "<html><body><p>Subject: RE: Re: RE: Urgent: Issues with Client Booking - Ref #AB12345 - Post-Mortem (sort of)</p><p>Hey Mario 'The Fixer',</p><p>Glad to hear you managed to calm 'Queen Diva' Vance down. 'Sparky' will embrace his new callsign!</p><p>Sunny Beaches eh? Sounds like someone I would get along with! </p><p>Don't hesitate to call me if you need me! </p><p>Thanks,<br>John Smith</p></body></html>",
+          "body_preview": "RE: Re: RE: Urgent: Issues with Client Booking - Ref #AB12345 - Post-Mortem (sort of). Subject: RE: Re: RE: Urgent: Issues with Client Booking - Ref #AB12345 - Post-Mortem (sort of) Hey Mario 'The Fixer', Glad to hear you managed to calm 'Queen Diva' Vance down. 'Sparky' will embrace his new callsign! Sunny Beaches eh?...",
+          "sender_email": "john.smith@travelagency.example.com",
+          "sender_name": "John Smith",
+          "received_datetime": "2024-01-26T12:15:00Z",
+          "sent_datetime": "2024-01-26T12:10:00Z",
+          "is_draft": false,
+          "is_read": false,
+          "importance": "Normal",
+          "conversation_id": "vance-complaint-987"
+        },
+        "recipients": [
+          {
+            "email": "mario.rossi@travelagency.example.com",
+            "name": "Mario Rossi",
+            "recipient_type": "To"
+          }
+        ],
+        "attachments": []
+      },
+      {
+        "account_id": 1,
+        "message": {
+          "subject": "RE: Urgent: Vance Debacle - Operation 'Beach Blanket Bingo' Aftermath",
+          "body": "<html><body><p>Hey John (codename: 'Paperclip' - because you're always holding things together, even when they're about to explode),</p><p>Operation 'Beach Blanket Bingo' is officially concluded, but I'm still feeling the residual psychic damage from dealing with Eleanor Vance, whom I'm now convinced is secretly a deposed European monarch in disguise. I'm calling her 'Queen Eleanor the Exorbitant' from now on.</p><p>And 'Sunny Beaches'? Don't let the name fool you. Turns out his real name is Bartholomew Chumley-Smythe III, and he's the black sheep of a family of penguin breeders from Antarctica. He apparently fled to the Maldives after a disastrous incident involving a rogue Emperor Penguin and a shipment of very expensive herring. I'm not making this up (okay, maybe I am, but it *feels* true).</p><p>Seriously though, thanks for sending over those booking details. You saved me from having to promise Queen Eleanor the Exorbitant a ride on a dolphin. I owe you one, Paperclip.</p><p>Now, if you'll excuse me, I'm going to go meditate and try to erase Bartholomew Chumley-Smythe III and his herring-obsessed penguin from my mind.</p><p>Ciao,<br>Mario ('Mission Control' - because I'm pretty sure I deserve hazard pay after this one) Rossi</p></body></html>",
+          "body_preview": "RE: Urgent: Vance Debacle - Operation 'Beach Blanket Bingo' Aftermath. Hey John (codename: 'Paperclip' - because you're always holding things together, even when they're about to explode), Operation 'Beach Blanket Bingo' is officially concluded, but I'm still feeling the residual psychic damage from...",
+          "sender_email": "mario.rossi@travelagency.example.com",
+          "sender_name": "Mario Rossi",
+          "received_datetime": "2024-01-26T12:30:00Z",
+          "sent_datetime": "2024-01-26T12:25:00Z",
+          "is_draft": false,
+          "is_read": false,
+          "importance": "Normal",
+          "conversation_id": "vance-complaint-987"
+        },
+        "recipients": [
+          {
+            "email": "john.smith@travelagency.example.com",
+            "name": "John Smith",
+            "recipient_type": "To"
+          }
+        ],
+        "attachments": []
+      },
+      {
+        "account_id": 1,
+        "message": {
+          "subject": "RE: RE: Urgent: Vance Debacle - Operation 'Beach Blanket Bingo' Aftermath",
+          "body": "<html><body><p>Subject: RE: RE: Urgent: Vance Debacle - Operation 'Beach Blanket Bingo' Aftermath</p><p>Mario 'Mission Control' Rossi,</p><p>Penguin breeders, deposed monarchs, and rogue herring...Sounds like a movie I'd watch. I'll keep the dolphin-riding offer in my back pocket for next time. Thanks for the laugh!</p><p>Consider Paperclip honored! </p><p>Now off to look for more fires to keep my skills sharp ;)</p><p>Thanks,<br>John Smith</p></body></html>",
+          "body_preview": "RE: RE: Urgent: Vance Debacle - Operation 'Beach Blanket Bingo' Aftermath. Subject: RE: RE: Urgent: Vance Debacle - Operation 'Beach Blanket Bingo' Aftermath Mario 'Mission Control' Rossi, Penguin breeders, deposed monarchs, and rogue herring...Sounds like a movie I'd watch. I'll keep the dolphin-riding offer...",
+          "sender_email": "john.smith@travelagency.example.com",
+          "sender_name": "John Smith",
+          "received_datetime": "2024-01-26T12:45:00Z",
+          "sent_datetime": "2024-01-26T12:40:00Z",
+          "is_draft": false,
+          "is_read": false,
+          "importance": "Normal",
+          "conversation_id": "vance-complaint-987"
+        },
+        "recipients": [
+          {
+            "email": "mario.rossi@travelagency.example.com",
+            "name": "Mario Rossi",
+            "recipient_type": "To"
+          }
+        ],
+        "attachments": []
+      },
+      {
+        "account_id": 1,
+        "message": {
+          "subject": "Inquiry: Bigfoot Sightseeing Tour - Ref #CryptoTravel",
+          "body": "<html><body><p>Dear Mario,</p><p>I am writing to inquire about the possibility of arranging a guided tour specifically focused on locating and observing Bigfoot. My associate, Dr. Quentin Quibble (self-proclaimed cryptozoologist), and I are extremely interested in documenting evidence of this elusive creature.</p><p>We would require a tour guide with extensive knowledge of local folklore, wilderness survival skills, and, ideally, prior experience with sasquatch-related encounters. Budget is somewhat flexible, but discretion is paramount. We also need a guarantee (in writing) that our findings will be kept confidential.</p><p>Please advise on available packages or custom tour options.</p><p>Sincerely,<br>Barnaby Butterfield</p></body></html>",
+          "body_preview": "Inquiry: Bigfoot Sightseeing Tour - Ref #CryptoTravel. Dear Mario, I am writing to inquire about the possibility of arranging a guided tour specifically focused on locating and observing Bigfoot. My associate, Dr. Quentin Quibble (self-proclaimed cryptozoologist), and I are extremely interested in documenting...",
+          "sender_email": "barnaby.butterfield@paranormalpursuits.example.com",
+          "sender_name": "Barnaby Butterfield",
+          "received_datetime": "2024-01-29T14:00:00Z",
+          "sent_datetime": "2024-01-29T13:55:00Z",
+          "is_draft": false,
+          "is_read": false,
+          "importance": "Normal",
+          "conversation_id": "bigfoot-tour-2024"
+        },
+        "recipients": [
+          {
+            "email": "mario.rossi@travelagency.example.com",
+            "name": "Mario Rossi",
+            "recipient_type": "To"
+          }
+        ],
+        "attachments": []
+      },
+      {
+        "account_id": 1,
+        "message": {
+          "subject": "RE: Inquiry: Bigfoot Sightseeing Tour - Ref #CryptoTravel",
+          "body": "<html><body><p>Dear Mr. Butterfield,</p><p>Thank you for your interesting inquiry. At [Travel Agency Name], we pride ourselves on crafting unique and memorable travel experiences for our clients.</p><p>While we do not currently offer pre-packaged Bigfoot sightseeing tours, we can certainly explore the possibility of creating a custom itinerary to suit your and Dr. Quibble's specific needs.</p><p>To best assist you, could you please provide more details on your preferred destination (e.g., specific regions known for Bigfoot sightings), desired duration of the tour, and any particular areas of expertise you require from the guide? Also, please advise on your budget range so we can allocate appropriate resources. </p><p>Regarding confidentiality, we are happy to include a non-disclosure agreement as part of the tour contract.</p><p>We look forward to hearing from you and helping you uncover the mysteries of the unknown!</p><p>Best Regards,<br>Mario Rossi<br>Account Manager</p><p>P.S. (My Internal Monologue: Please tell me this is a prank. I've dealt with demanding clients, but never Bigfoot hunters. Do I need to get special insurance for this? What if they actually *find* one?!)</p></body></html>",
+          "body_preview": "RE: Inquiry: Bigfoot Sightseeing Tour - Ref #CryptoTravel. Dear Mr. Butterfield, Thank you for your interesting inquiry. At [Travel Agency Name], we pride ourselves on crafting unique and memorable travel experiences for our clients. While we do not currently offer pre-packaged Bigfoot sightseeing tours...",
+          "sender_email": "mario.rossi@travelagency.example.com",
+          "sender_name": "Mario Rossi",
+          "received_datetime": "2024-01-29T15:15:00Z",
+          "sent_datetime": "2024-01-29T15:10:00Z",
+          "is_draft": false,
+          "is_read": false,
+          "importance": "Normal",
+          "conversation_id": "bigfoot-tour-2024"
+        },
+        "recipients": [
+          {
+            "email": "barnaby.butterfield@paranormalpursuits.example.com",
+            "name": "Barnaby Butterfield",
+            "recipient_type": "To"
+          }
+        ],
+        "attachments": []
+      },
+      {
+        "account_id": 1,
+        "message": {
+          "subject": "RE: Inquiry: Bigfoot Sightseeing Tour - Ref #CryptoTravel",
+          "body": "<html><body><p>Dear Mario,</p><p>Thank you for your prompt response. We are considering the Pacific Northwest region of the United States, specifically areas around the Cascade Mountains. A 7-10 day expedition would be ideal. Dr. Quibble requires a guide with knowledge of primate vocalizations and the ability to cast plaster footprints (he's quite particular about the type of plaster).</p><p>Our budget is in the range of $10,000 - $15,000 USD, exclusive of equipment (we have specialized thermal imaging and audio recording devices). </p><p>We are eager to proceed with this unusual request! </p><p>Sincerely,<br>Barnaby Butterfield</p><p>P.S. (I wonder if I should mention that Dr. Quibble carries a tranquilizer gun “just in case”. Nah, better not.)</p></body></html>",
+          "body_preview": "RE: Inquiry: Bigfoot Sightseeing Tour - Ref #CryptoTravel. Dear Mario, Thank you for your prompt response. We are considering the Pacific Northwest region of the United States, specifically areas around the Cascade Mountains. A 7-10 day expedition would be ideal...",
+          "sender_email": "barnaby.butterfield@paranormalpursuits.example.com",
+          "sender_name": "Barnaby Butterfield",
+          "received_datetime": "2024-01-29T16:00:00Z",
+          "sent_datetime": "2024-01-29T15:55:00Z",
+          "is_draft": false,
+          "is_read": false,
+          "importance": "Normal",
+          "conversation_id": "bigfoot-tour-2024"
+        },
+        "recipients": [
+          {
+            "email": "mario.rossi@travelagency.example.com",
+            "name": "Mario Rossi",
+            "recipient_type": "To"
+          }
+        ],
+        "attachments": []
+      },
+      {
+        "account_id": 1,
+        "message": {
+          "subject": "Inquiry: Dreamy Japan Adventure - Ref #SakuraDreams",
+          "body": "<html><body><p>Dear Mario,</p><p>My name is Anya Petrova, and I'm planning a trip to Japan next spring, during the cherry blossom season. It's always been my dream to visit! I'm looking for a truly authentic experience, beyond the usual tourist spots.</p><p>I'm interested in exploring ancient temples, participating in a traditional tea ceremony, and perhaps even learning a bit of calligraphy. I'd also love to experience the vibrant nightlife in Tokyo, maybe find a karaoke bar that's not too crowded with foreigners.</p><p>I'm traveling solo and would prefer boutique hotels or ryokans (traditional Japanese inns) with a personal touch. I'm open to suggestions on lesser-known regions or festivals that coincide with the cherry blossoms.</p><p>My budget is relatively flexible, but I'm looking for value and unique experiences, not necessarily luxury. Please let me know what options you can offer.</p><p>Arigato (thank you),<br>Anya Petrova</p></body></html>",
+          "body_preview": "Inquiry: Dreamy Japan Adventure - Ref #SakuraDreams. Dear Mario, My name is Anya Petrova, and I'm planning a trip to Japan next spring, during the cherry blossom season. It's always been my dream to visit! I'm looking for a truly authentic experience, beyond the usual tourist spots. I'm interested in...",
+          "sender_email": "anya.petrova@wanderlustadventures.example.com",
+          "sender_name": "Anya Petrova",
+          "received_datetime": "2024-02-02T09:00:00Z",
+          "sent_datetime": "2024-02-02T08:55:00Z",
+          "is_draft": false,
+          "is_read": false,
+          "importance": "Normal",
+          "conversation_id": "japan-cherryblossom-2025"
+        },
+        "recipients": [
+          {
+            "email": "mario.rossi@travelagency.example.com",
+            "name": "Mario Rossi",
+            "recipient_type": "To"
+          }
+        ],
+        "attachments": []
+      },
+      {
+        "account_id": 1,
+        "message": {
+          "subject": "RE: Inquiry: Dreamy Japan Adventure - Ref #SakuraDreams",
+          "body": "<html><body><p>Dear Anya,</p><p>Konnichiwa! Thank you for reaching out to us about your dreamy Japan adventure. Japan during cherry blossom season is truly magical, and we're delighted to help you create an unforgettable experience.</p><p>Based on your preferences, I recommend considering a combination of classic destinations like Kyoto and Nara with some off-the-beaten-path gems. For example, the Takayama Spring Festival (usually held in mid-April) is a stunning spectacle with fewer crowds than Kyoto.</p><p>For your accommodation, I can suggest some charming ryokans in the Gifu Prefecture known for their exquisite Kaiseki dinners (multi-course traditional Japanese meal) and onsen (hot springs). In Tokyo, we can arrange for you to visit a local karaoke bar in Shinjuku frequented by salarymen and residents – a truly immersive experience!</p><p>I'm currently putting together a detailed itinerary with several options, including tea ceremony lessons in Uji (renowned for its matcha) and calligraphy workshops in Kyoto. I'll also include information on transportation, local customs, and suggested etiquette tips.</p><p>Could you please let me know your preferred dates for the trip? This will help me determine the peak cherry blossom viewing periods in different regions.</p><p>Domo arigato (thank you very much),<br>Mario Rossi<br>Account Manager</p><p>P.S. (Internal Monologue: Finally, a normal request! No Bigfoot, no deposed monarchs... Just a lovely lady wanting to experience the beauty of Japan. Must. Not. Screw. This. Up.)</p></body></html>",
+          "body_preview": "RE: Inquiry: Dreamy Japan Adventure - Ref #SakuraDreams. Dear Anya, Konnichiwa! Thank you for reaching out to us about your dreamy Japan adventure. Japan during cherry blossom season is truly magical, and we're delighted to help you create an unforgettable experience. Based on your...",
+          "sender_email": "mario.rossi@travelagency.example.com",
+          "sender_name": "Mario Rossi",
+          "received_datetime": "2024-02-02T10:15:00Z",
+          "sent_datetime": "2024-02-02T10:10:00Z",
+          "is_draft": false,
+          "is_read": false,
+          "importance": "Normal",
+          "conversation_id": "japan-cherryblossom-2025"
+        },
+        "recipients": [
+          {
+            "email": "anya.petrova@wanderlustadventures.example.com",
+            "name": "Anya Petrova",
+            "recipient_type": "To"
+          }
+        ],
+        "attachments": []
+      },
+      {
+        "account_id": 1,
+        "message": {
+          "subject": "RE: Inquiry: Dreamy Japan Adventure - Ref #SakuraDreams",
+          "body": "<html><body><p>Dear Mario,</p><p>That sounds absolutely perfect! The Takayama Spring Festival sounds wonderful, and I'm especially excited about the ryokan suggestion in the Gifu Prefecture. The karaoke bar experience also seems like a lot of fun!</p><p>My preferred travel dates are from April 1st to April 15th. I'm flexible, but ideally, I'd like to be in Japan during the peak cherry blossom bloom. </p><p>Thank you for your amazing suggestions! I'm really looking forward to seeing the detailed itinerary.</p><p>Warmly,<br>Anya Petrova</p></body></html>",
+          "body_preview": "RE: Inquiry: Dreamy Japan Adventure - Ref #SakuraDreams. Dear Mario, That sounds absolutely perfect! The Takayama Spring Festival sounds wonderful, and I'm especially excited about the ryokan suggestion in the Gifu Prefecture. The karaoke bar experience also seems like a lot of fun! My...",
+          "sender_email": "anya.petrova@wanderlustadventures.example.com",
+          "sender_name": "Anya Petrova",
+          "received_datetime": "2024-02-02T11:00:00Z",
+          "sent_datetime": "2024-02-02T10:55:00Z",
+          "is_draft": false,
+          "is_read": false,
+          "importance": "Normal",
+          "conversation_id": "japan-cherryblossom-2025"
+        },
+        "recipients": [
+          {
+            "email": "mario.rossi@travelagency.example.com",
+            "name": "Mario Rossi",
+            "recipient_type": "To"
+          }
+        ],
+        "attachments": []
+      },
+      {
+        "account_id": 1,
+        "message": {
+          "subject": "Inquiry: Vietnam Adventure - Culture, Food & Beaches! - Ref #PhoReal",
+          "body": "<html><body><p>Dear Mario,</p><p>My friend, Liam, and I are planning a trip to Vietnam in October. We're both in our late 20s and looking for a mix of cultural experiences, amazing food, and some relaxing beach time. We're thinking of around 2 weeks.</p><p>We definitely want to explore Hanoi and Ho Chi Minh City, see the Ha Long Bay, and maybe visit some of the central coast towns like Hoi An. We're interested in cooking classes, trying authentic street food, and learning about Vietnamese history.</p><p>Ideally, we'd like a balance between organized tours and free time to explore on our own. We're looking for comfortable but not overly luxurious accommodation – think boutique hotels or guesthouses with character.</p><p>What kind of itinerary and pricing can you put together for us?</p><p>Thanks in advance,<br>Chloe Miller</p></body></html>",
+          "body_preview": "Inquiry: Vietnam Adventure - Culture, Food & Beaches! - Ref #PhoReal. Dear Mario, My friend, Liam, and I are planning a trip to Vietnam in October. We're both in our late 20s and looking for a mix of cultural experiences, amazing food, and some relaxing beach time. We're thinking of around 2 weeks.",
+          "sender_email": "chloe.miller@globetrotters.example.com",
+          "sender_name": "Chloe Miller",
+          "received_datetime": "2024-02-05T11:30:00Z",
+          "sent_datetime": "2024-02-05T11:25:00Z",
+          "is_draft": false,
+          "is_read": false,
+          "importance": "Normal",
+          "conversation_id": "vietnam-october-adventure"
+        },
+        "recipients": [
+          {
+            "email": "mario.rossi@travelagency.example.com",
+            "name": "Mario Rossi",
+            "recipient_type": "To"
+          }
+        ],
+        "attachments": []
+      },
+      {
+        "account_id": 1,
+        "message": {
+          "subject": "RE: Inquiry: Vietnam Adventure - Culture, Food & Beaches! - Ref #PhoReal",
+          "body": "<html><body><p>Dear Chloe,</p><p>Xin chào! Vietnam in October is a fantastic choice – the weather is generally pleasant, and it's a great time to explore the country's diverse regions.</p><p>Based on your interests, I can propose a 14-day itinerary that covers the highlights while leaving room for independent exploration. We could start in Hanoi with a street food tour and a visit to the Temple of Literature, followed by a scenic cruise through Ha Long Bay with an overnight stay on a junk boat.</p><p>Then, we'd fly down to Da Nang and explore the charming town of Hoi An, known for its tailor shops, ancient architecture, and delicious Cao Lau noodles. We can arrange a cooking class where you'll learn to prepare traditional Vietnamese dishes. Finally, we'd head to Ho Chi Minh City for a taste of modern Vietnam, with visits to historical sites like the War Remnants Museum and the Cu Chi Tunnels. You could also enjoy some beach time in Phu Quoc before flying home.</p><p>Accommodation options would include carefully selected boutique hotels and guesthouses with local character. I'll prepare a detailed itinerary with different pricing tiers to fit your budget.</p><p>Does this sound appealing? Are there any specific interests you and Liam have that I should factor in?</p><p>Cảm ơn (thank you),<br>Mario Rossi<br>Account Manager</p><p>P.S. (Internal Monologue: Ha Long Bay on a junk boat... Cooking classes in Hoi An... Street food tours in Hanoi... I'm getting hungry just thinking about it! I might need to book myself a research trip… purely for professional development, of course.)</p></body></html>",
+          "body_preview": "RE: Inquiry: Vietnam Adventure - Culture, Food & Beaches! - Ref #PhoReal. Dear Chloe, Xin chào! Vietnam in October is a fantastic choice – the weather is generally pleasant, and it's a great time to explore the country's diverse regions. Based on your interests, I can propose a 14-day itinerary that...",
+          "sender_email": "mario.rossi@travelagency.example.com",
+          "sender_name": "Mario Rossi",
+          "received_datetime": "2024-02-05T12:45:00Z",
+          "sent_datetime": "2024-02-05T12:40:00Z",
+          "is_draft": false,
+          "is_read": false,
+          "importance": "Normal",
+          "conversation_id": "vietnam-october-adventure"
+        },
+        "recipients": [
+          {
+            "email": "chloe.miller@globetrotters.example.com",
+            "name": "Chloe Miller",
+            "recipient_type": "To"
+          }
+        ],
+        "attachments": []
+      },
+      {
+        "account_id": 1,
+        "message": {
+          "subject": "RE: Inquiry: Vietnam Adventure - Culture, Food & Beaches! - Ref #PhoReal",
+          "body": "<html><body><p>Dear Mario,</p><p>That itinerary sounds amazing! We're definitely interested in all of those activities. Liam is a big history buff, so anything related to Vietnamese history would be great. I'm really into photography, so any suggestions for picturesque locations would be appreciated too.</p><p>Phu Quoc sounds perfect for some beach relaxation. We're also open to visiting other beaches if you have any recommendations.</p><p>We're looking forward to seeing the detailed itinerary and pricing options!</p><p>Cheers,<br>Chloe Miller</p></body></html>",
+          "body_preview": "RE: Inquiry: Vietnam Adventure - Culture, Food & Beaches! - Ref #PhoReal. Dear Mario, That itinerary sounds amazing! We're definitely interested in all of those activities. Liam is a big history buff, so anything related to Vietnamese history would be great. I'm really into photography, so any suggestions for picturesque...",
+          "sender_email": "chloe.miller@globetrotters.example.com",
+          "sender_name": "Chloe Miller",
+          "received_datetime": "2024-02-05T13:30:00Z",
+          "sent_datetime": "2024-02-05T13:25:00Z",
+          "is_draft": false,
+          "is_read": false,
+          "importance": "Normal",
+          "conversation_id": "vietnam-october-adventure"
+        },
+        "recipients": [
+          {
+            "email": "mario.rossi@travelagency.example.com",
+            "name": "Mario Rossi",
+            "recipient_type": "To"
+          }
+        ],
+        "attachments": []
+      },
+      {
+        "account_id": 1,
+        "message": {
+          "subject": "Thailand Adventure Inquiry - Temples, Elephants & Islands! Ref: #SawasdeeAdventures",
+          "body": "<html><body><p>Dear Mario,</p><p>My husband, David, and I are planning our honeymoon, and Thailand is at the top of our list! We're thinking of traveling in November for about 12 days. We're looking for a mix of cultural experiences, ethical encounters with elephants, and beautiful beaches. We're open to suggestions!</p><p>We'd love to visit Chiang Mai, explore some temples, and perhaps learn a bit about Thai cooking. We're also very interested in ethical elephant sanctuaries where we can interact with these magnificent creatures responsibly.</p><p>For beaches, we're dreaming of crystal-clear water and white sand. We're open to either the east or west coast islands. We prefer a more relaxed atmosphere, not the crazy party scene.</p><p>Our budget is around $5000 USD for both of us, excluding flights. Can you help us create a memorable honeymoon itinerary?</p><p>Thank you so much!</p><p>Sincerely,</p><p>Sarah Jones</p></body></html>",
+          "body_preview": "Thailand Adventure Inquiry - Temples, Elephants & Islands! Ref: #SawasdeeAdventures. Dear Mario, My husband, David, and I are planning our honeymoon, and Thailand is at the top of our list! We're thinking of traveling in November for about 12 days. We're looking for a mix of cultural...",
+          "sender_email": "sarah.jones@email.example.com",
+          "sender_name": "Sarah Jones",
+          "received_datetime": "2024-02-07T14:00:00Z",
+          "sent_datetime": "2024-02-07T13:55:00Z",
+          "is_draft": false,
+          "is_read": false,
+          "importance": "Normal",
+          "conversation_id": "thailand-honeymoon-november"
+        },
+        "recipients": [
+          {
+            "email": "mario.rossi@travelagency.example.com",
+            "name": "Mario Rossi",
+            "recipient_type": "To"
+          }
+        ],
+        "attachments": []
+      },
+      {
+        "account_id": 1,
+        "message": {
+          "subject": "RE: Thailand Adventure Inquiry - Temples, Elephants & Islands! Ref: #SawasdeeAdventures",
+          "body": "<html><body><p>Dear Sarah,</p><p>Sawasdee krap! Congratulations on your upcoming wedding! Thailand is a wonderful choice for a honeymoon. November is a great time to visit, as it's typically the start of the dry season.</p><p>For 12 days, we can create a fantastic itinerary that balances culture, elephants, and beaches within your budget. I suggest starting in Chiang Mai for a few days. We can arrange visits to ethical elephant sanctuaries like Elephant Nature Park, where you can interact with the elephants responsibly. We can also explore the beautiful temples, such as Doi Suthep, and take a Thai cooking class.</p><p>From Chiang Mai, we can fly down to Krabi and explore the beautiful Railay Beach or head to Koh Lanta for a more relaxed island vibe. Both offer stunning scenery and clear waters. You can enjoy snorkeling, swimming, and simply relaxing on the beach.</p><p>I'm creating a detailed itinerary with accommodation options, including charming boutique hotels and beachfront resorts. I'll ensure that all activities are ethical and sustainable. I'll also include information about Thai customs and etiquette to enhance your experience.</p><p>Does this sound like a good starting point? Are there any particular activities or beaches that you've already researched?</p><p>Khop khun krap (thank you),<br>Mario Rossi<br>Account Manager</p><p>P.S. (Internal Monologue: Honeymoon trip... gotta make this perfect! No rogue penguins or demanding queens this time. Time to channel my inner romantic and create some magic for Sarah and David.)</p></body></html>",
+          "body_preview": "RE: Thailand Adventure Inquiry - Temples, Elephants & Islands! Ref: #SawasdeeAdventures. Dear Mario, Sawasdee krap! Congratulations on your upcoming wedding! Thailand is a wonderful choice for a honeymoon. November is a great time to visit, as it's typically the start of the dry season.",
+          "sender_email": "mario.rossi@travelagency.example.com",
+          "sender_name": "Mario Rossi",
+          "received_datetime": "2024-02-07T15:15:00Z",
+          "sent_datetime": "2024-02-07T15:10:00Z",
+          "is_draft": false,
+          "importance": "Normal",
+          "conversation_id": "thailand-honeymoon-november"
+        },
+        "recipients": [
+          {
+            "email": "sarah.jones@email.example.com",
+            "name": "Sarah Jones",
+            "recipient_type": "To"
+          }
+        ],
+        "attachments": []
+      },
+      {
+        "account_id": 1,
+        "message": {
+          "subject": "RE: Thailand Adventure Inquiry - Temples, Elephants & Islands! Ref: #SawasdeeAdventures",
+          "body": "<html><body><p>Dear Mario,</p><p>That sounds absolutely wonderful! Thank you so much for the suggestions. Chiang Mai and the Elephant Nature Park sound perfect. We also like the idea of Railay Beach or Koh Lanta. We're open to seeing the itinerary with the different accommodation options.</p><p>We haven't researched any specific beaches yet, so we're relying on your expertise. We're just looking for a romantic and relaxing place to unwind after all the wedding stress.</p><p>We're so excited about this trip! We can't wait to see the itinerary.</p><p>Best,</p><p>Sarah Jones</p></body></html>",
+          "body_preview": "RE: Thailand Adventure Inquiry - Temples, Elephants & Islands! Ref: #SawasdeeAdventures. Dear Mario, That sounds absolutely wonderful! Thank you so much for the suggestions. Chiang Mai and the Elephant Nature Park sound perfect. We also like the idea of Railay Beach or Koh Lanta. We're open to seeing the itinerary with the different...",
+          "sender_email": "sarah.jones@email.example.com",
+          "sender_name": "Sarah Jones",
+          "received_datetime": "2024-02-07T16:00:00Z",
+          "sent_datetime": "2024-02-07T15:55:00Z",
+          "is_draft": false,
+          "importance": "Normal",
+          "conversation_id": "thailand-honeymoon-november"
+        },
+        "recipients": [
+          {
+            "email": "mario.rossi@travelagency.example.com",
+            "name": "Mario Rossi",
+            "recipient_type": "To"
+          }
+        ],
+        "attachments": []
+      },
+      {
+        "account_id": 1,
+        "message": {
+          "subject": "Inquiry: Norway Fjords Cruise - Northern Lights & Natural Wonders! - Ref #VikingDreams",
+          "body": "<html><body><p>Dear Mario,</p><p>My wife and I, Robert and Elizabeth Olsen, are celebrating our 30th wedding anniversary next year, and we've always dreamed of taking a cruise through the Norwegian fjords. We're thinking of a 7-day cruise in February to hopefully see the Northern Lights.</p><p>We're interested in a cruise that offers a good balance of scenic views, cultural experiences, and opportunities for shore excursions. We'd love to visit some of the charming coastal towns and learn about Norwegian history and culture.</p><p>We're not looking for a party cruise but rather a more refined and relaxed experience. We'd prefer a smaller ship with fewer passengers. Our budget is flexible, but we appreciate good value for money.</p><p>Can you recommend some cruise options that fit our criteria?</p><p>Thank you in advance for your assistance.</p><p>Sincerely,</p><p>Robert Olsen</p></body></html>",
+          "body_preview": "Inquiry: Norway Fjords Cruise - Northern Lights & Natural Wonders! - Ref #VikingDreams. Dear Mario, My wife and I, Robert and Elizabeth Olsen, are celebrating our 30th wedding anniversary next year, and we've always dreamed of taking a cruise through the Norwegian fjords. We're thinking of a...",
+          "sender_email": "robert.olsen@email.example.com",
+          "sender_name": "Robert Olsen",
+          "received_datetime": "2024-02-09T09:30:00Z",
+          "sent_datetime": "2024-02-09T09:25:00Z",
+          "is_draft": false,
+          "importance": "Normal",
+          "conversation_id": "norway-cruise-anniversary"
+        },
+        "recipients": [
+          {
+            "email": "mario.rossi@travelagency.example.com",
+            "name": "Mario Rossi",
+            "recipient_type": "To"
+          }
+        ],
+        "attachments": []
+      },
+      {
+        "account_id": 1,
+        "message": {
+          "subject": "RE: Inquiry: Norway Fjords Cruise - Northern Lights & Natural Wonders! - Ref #VikingDreams",
+          "body": "<html><body><p>Dear Robert,</p><p>Gratulerer med jubileet! (Congratulations on the anniversary!) A Norway fjords cruise is a fantastic way to celebrate 30 years of marriage, especially in February with the chance to witness the magical Northern Lights.</p><p>Based on your preferences for a refined and relaxed experience on a smaller ship, I highly recommend considering Hurtigruten or Havila Voyages. Both offer classic Norwegian coastal voyages that prioritize scenic views, cultural experiences, and shore excursions over onboard entertainment and large crowds.</p><p>A typical 7-day itinerary might include stops in Bergen, Alesund, Trondheim, and Tromsø. You'll have opportunities to explore these charming coastal towns, visit museums, and participate in activities like dog sledding or snowmobiling. Of course, the main highlight is the stunning scenery of the fjords and the potential to see the Northern Lights dancing in the sky.</p><p>I'll prepare a detailed proposal with different cabin options and shore excursion packages. I'll also include information about onboard dining, activities, and dress code. February is a popular time to cruise, so booking in advance is highly recommended.</p><p>Are you interested in any particular shore excursions or have you cruised with Hurtigruten or Havila Voyages before?</p><p>Med vennlig hilsen (Sincerely),<br>Mario Rossi<br>Account Manager</p><p>P.S. (Internal Monologue: Norway cruise…Northern Lights… Sounds so peaceful and romantic. Must resist the urge to book myself on this one too. Though, a little winter escape to chase the Aurora Borealis wouldn't be so bad... focus, Mario, focus on the client!)</p></body></html>",
+          "body_preview": "RE: Inquiry: Norway Fjords Cruise - Northern Lights & Natural Wonders! - Ref #VikingDreams. Dear Mario, Gratulerer med jubileet! (Congratulations on the anniversary!) A Norway fjords cruise is a fantastic way to celebrate 30 years of marriage, especially in February with the chance to witness the magical Northern Lights.",
+          "sender_email": "mario.rossi@travelagency.example.com",
+          "sender_name": "Mario Rossi",
+          "received_datetime": "2024-02-09T10:45:00Z",
+          "sent_datetime": "2024-02-09T10:40:00Z",
+          "is_draft": false,
+          "importance": "Normal",
+          "conversation_id": "norway-cruise-anniversary"
+        },
+        "recipients": [
+          {
+            "email": "robert.olsen@email.example.com",
+            "name": "Robert Olsen",
+            "recipient_type": "To"
+          }
+        ],
+        "attachments": []
+      },
+      {
+        "account_id": 1,
+        "message": {
+          "subject": "RE: Inquiry: Norway Fjords Cruise - Northern Lights & Natural Wonders! - Ref #VikingDreams",
+          "body": "<html><body><p>Dear Mario,</p><p>Thank you for your prompt and helpful reply! We appreciate the recommendations for Hurtigruten and Havila Voyages. We haven't cruised with either of them before, so we're relying on your expertise.</p><p>We're definitely interested in shore excursions, particularly those that offer cultural experiences or opportunities to see wildlife. Dog sledding sounds intriguing! We're also keen on visiting museums and learning about Norwegian history.</p><p>We look forward to seeing the detailed proposal with cabin options and pricing. We understand that February is a popular time, so we're ready to book as soon as possible.</p><p>Thanks again!</p><p>Sincerely,</p><p>Robert Olsen</p></body></html>",
+          "body_preview": "RE: Inquiry: Norway Fjords Cruise - Northern Lights & Natural Wonders! - Ref #VikingDreams. Dear Mario, Thank you for your prompt and helpful reply! We appreciate the recommendations for Hurtigruten and Havila Voyages. We haven't cruised with either of them before, so we're relying on your expertise. We're definitely interested in shore excursions, particularly those that...",
+          "sender_email": "robert.olsen@email.example.com",
+          "sender_name": "Robert Olsen",
+          "received_datetime": "2024-02-09T11:30:00Z",
+          "sent_datetime": "2024-02-09T11:25:00Z",
+          "is_draft": false,
+          "importance": "Normal",
+          "conversation_id": "norway-cruise-anniversary"
+        },
+        "recipients": [
+          {
+            "email": "mario.rossi@travelagency.example.com",
+            "name": "Mario Rossi",
+            "recipient_type": "To"
+          }
+        ],
+        "attachments": []
       }
     ]
   }
