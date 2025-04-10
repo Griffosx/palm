@@ -81,7 +81,7 @@ const EmailItem: React.FC<EmailItemProps> = ({
             {email.body.length > 100 ? "..." : ""}
           </div>
           {email.attachments && email.attachments.length > 0 && (
-            <div className="text-left text-xs text-gray-500 mt-1">
+            <div className="text-left text-xs mt-1">
               <span className="inline-flex items-left">
                 <svg
                   className="w-4 h-4 mr-1"

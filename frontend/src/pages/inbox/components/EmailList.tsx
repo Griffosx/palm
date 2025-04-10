@@ -86,7 +86,7 @@ const EmailList: React.FC<EmailListProps> = ({
   return (
     <div>
       {emails.length === 0 && !loading ? (
-        <div className="p-4 text-center text-gray-500">No emails found</div>
+        <div className="p-4 text-center">No emails found</div>
       ) : (
         <>
           {emails.map((email, index) => {

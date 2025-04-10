@@ -3,7 +3,13 @@ import BackgroundOverlay from "../../../components/BackgroundOverlay";
 import { hexToRgba, cream, borderCream } from "../../../styles/themes";
 import { controllers } from "../../../../wailsjs/go/models";
 import { GetEmail } from "../../../../wailsjs/go/main/App";
-import { KnowledgeIcon } from "../../../components/Icons";
+import {
+  ReplyIcon,
+  ReplyAllIcon,
+  ForwardIcon,
+  AIIcon,
+  KnowledgeIcon,
+} from "../../../components/Icons";
 import NoiseOverlay from "../../../components/NoiseOverlay";
 
 interface EmailDetailPanelProps {
@@ -108,7 +114,7 @@ const EmailDetailPanel: React.FC<EmailDetailPanelProps> = ({
         }}
       >
         {!selectedEmailId ? (
-          <div className="h-full flex items-center justify-center text-gray-500 p-6 md:p-8">
+          <div className="h-full flex items-center justify-center p-6 md:p-8">
             <p>Select an email to view its content</p>
           </div>
         ) : loading ? (
@@ -136,7 +142,7 @@ const EmailDetailPanel: React.FC<EmailDetailPanelProps> = ({
                   <div className="flex items-center mb-1">
                     <div className="w-8 h-8 rounded-full bg-gray-300 flex items-center justify-center mr-3 relative overflow-hidden flex-shrink-0">
                       <NoiseOverlay />
-                      <span className="z-10 font-bold text-sm text-gray-700">
+                      <span className="z-10 font-bold text-sm">
                         {getInitials(email)}
                       </span>
                     </div>
@@ -148,7 +154,7 @@ const EmailDetailPanel: React.FC<EmailDetailPanelProps> = ({
                         {email.senderName || email.senderEmail}
                       </div>
                       <div
-                        className="text-xs text-gray-600 truncate"
+                        className="text-xstruncate"
                         title={email.senderEmail}
                       >
                         &lt;{email.senderEmail}&gt;
@@ -156,7 +162,7 @@ const EmailDetailPanel: React.FC<EmailDetailPanelProps> = ({
                     </div>
                   </div>
                   <div
-                    className="text-xs text-gray-600 mb-2 truncate"
+                    className="text-xs mb-2 truncate"
                     title={formatRecipients(email)}
                   >
                     {formatRecipients(email)}
@@ -165,28 +171,28 @@ const EmailDetailPanel: React.FC<EmailDetailPanelProps> = ({
 
                 <div className="flex flex-col items-end flex-shrink-0 ml-4">
                   <div className="flex space-x-2 mb-2">
-                    <button className="p-1.5 text-gray-500 hover:text-gray-800 hover:bg-gray-100 rounded">
+                    <button className="p-1.5">
                       <KnowledgeIcon
                         fill="currentColor"
                         width="20"
                         height="20"
                       />
                     </button>
-                    <button className="p-1.5 text-gray-500 hover:text-gray-800 hover:bg-gray-100 rounded">
+                    <button className="p-1.5">
                       <KnowledgeIcon
                         fill="currentColor"
                         width="20"
                         height="20"
                       />
                     </button>
-                    <button className="p-1.5 text-gray-500 hover:text-gray-800 hover:bg-gray-100 rounded">
+                    <button className="p-1.5">
                       <KnowledgeIcon
                         fill="currentColor"
                         width="20"
                         height="20"
                       />
                     </button>
-                    <button className="p-1.5 text-gray-500 hover:text-gray-800 hover:bg-gray-100 rounded">
+                    <button className="p-1.5">
                       <KnowledgeIcon
                         fill="currentColor"
                         width="20"
@@ -194,7 +200,7 @@ const EmailDetailPanel: React.FC<EmailDetailPanelProps> = ({
                       />
                     </button>
                   </div>
-                  <div className="text-xs text-gray-500 whitespace-nowrap">
+                  <div className="text-xs whitespace-nowrap">
                     {formatDate(email.receivedAt)}
                   </div>
                 </div>
@@ -248,7 +254,7 @@ const EmailDetailPanel: React.FC<EmailDetailPanelProps> = ({
             </div>
           </div>
         ) : (
-          <div className="h-full flex items-center justify-center text-gray-500 p-6 md:p-8">
+          <div className="h-full flex items-center justify-center p-6 md:p-8">
             <p>Email data not available.</p>
           </div>
         )}
