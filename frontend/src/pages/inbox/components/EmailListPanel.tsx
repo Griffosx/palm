@@ -8,12 +8,14 @@ interface EmailListPanelProps {
   searchQuery: string;
   onSearch: (query: string) => void;
   onSelectEmail: (id: number) => void;
+  selectedEmailId: number | null;
 }
 
 const EmailListPanel: React.FC<EmailListPanelProps> = ({
   searchQuery,
   onSearch,
   onSelectEmail,
+  selectedEmailId,
 }) => {
   const backgroundColor = cream;
   const boxShadow = `${hexToRgba(borderCream)} 0px 0px 3px`;
@@ -47,6 +49,7 @@ const EmailListPanel: React.FC<EmailListPanelProps> = ({
             <EmailList
               searchQuery={searchQuery}
               onSelectEmail={onSelectEmail}
+              selectedEmailId={selectedEmailId}
             />
           </div>
         </div>

@@ -12,9 +12,14 @@ import {
 interface EmailItemProps {
   email: controllers.EmailResponse;
   onClick: (id: number) => void;
+  isSelected: boolean;
 }
 
-const EmailItem: React.FC<EmailItemProps> = ({ email, onClick }) => {
+const EmailItem: React.FC<EmailItemProps> = ({
+  email,
+  onClick,
+  isSelected,
+}) => {
   const formattedDate = new Date(email.receivedAt).toLocaleString(undefined, {
     month: "short",
     day: "numeric",
@@ -106,13 +111,16 @@ const EmailItem: React.FC<EmailItemProps> = ({ email, onClick }) => {
     <div
       className="flex p-5 cursor-pointer transition rounded-xl relative mb-2"
       style={{
-        backgroundColor: isHovered ? lightAquamarine : "transparent",
+        backgroundColor:
+          isHovered || isSelected ? lightAquamarine : "transparent",
       }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       onClick={() => onClick(email.id)}
     >
-      {isHovered && <NoiseOverlay className="rounded-xl absolute inset-0" />}
+      {(isHovered || isSelected) && (
+        <NoiseOverlay className="rounded-xl absolute inset-0" />
+      )}
       {leftSide()}
       {rightSide()}
     </div>

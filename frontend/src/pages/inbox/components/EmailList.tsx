@@ -9,11 +9,13 @@ const ACCOUNT_ID = 1;
 interface EmailListProps {
   searchQuery?: string;
   onSelectEmail: (id: number) => void;
+  selectedEmailId: number | null;
 }
 
 const EmailList: React.FC<EmailListProps> = ({
   searchQuery,
   onSelectEmail,
+  selectedEmailId,
 }) => {
   const [emails, setEmails] = useState<controllers.EmailResponse[]>([]);
   const [loading, setLoading] = useState(false);
@@ -88,10 +90,15 @@ const EmailList: React.FC<EmailListProps> = ({
       ) : (
         <>
           {emails.map((email, index) => {
+            const isSelected = email.id === selectedEmailId;
             if (emails.length === index + 1) {
               return (
                 <div ref={lastEmailElementRef} key={email.id}>
-                  <EmailItem email={email} onClick={onSelectEmail} />
+                  <EmailItem
+                    email={email}
+                    onClick={onSelectEmail}
+                    isSelected={isSelected}
+                  />
                 </div>
               );
             } else {
@@ -100,6 +107,7 @@ const EmailList: React.FC<EmailListProps> = ({
                   key={email.id}
                   email={email}
                   onClick={onSelectEmail}
+                  isSelected={isSelected}
                 />
               );
             }

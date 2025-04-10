@@ -27,6 +27,7 @@ const InboxPage: React.FC = () => {
             searchQuery={searchQuery}
             onSearch={handleSearch}
             onSelectEmail={handleSelectEmail}
+            selectedEmailId={selectedEmailId}
           />
           <EmailDetailPanel selectedEmailId={selectedEmailId} />
         </div>
