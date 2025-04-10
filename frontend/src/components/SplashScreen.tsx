@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { Navigate } from "react-router-dom";
-import palmBg from "../assets/images/palm-bg.jpg";
 
 const SplashScreen = () => {
   const [redirect, setRedirect] = useState(false);
@@ -30,16 +29,7 @@ const SplashScreen = () => {
   }
 
   return (
-    <div
-      className="flex items-center justify-center h-screen w-screen"
-      style={{
-        backgroundImage: `url(${palmBg})`,
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        filter: `blur(${blurAmount}px)`,
-        transition: "filter 2s ease-in-out",
-      }}
-    >
+    <div className="flex items-center justify-center h-screen w-screen">
       <div
         className="text-center text-white"
         style={{

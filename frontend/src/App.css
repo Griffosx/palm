@@ -1,1 +1,5 @@
 @import "tailwindcss";
+
+@theme {
+    --color-regal-blue: oklch(0.72 0.11 178);
+}

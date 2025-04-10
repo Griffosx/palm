@@ -2,6 +2,8 @@ import React from "react";
 import Layout from "../components/Layout";
 import Wrapper from "../components/Wrapper";
 
+// import { ListEmails, GetEmail } from "../wailsjs/go/main/App";
+
 const HomePage: React.FC = () => {
   return (
     <Layout>

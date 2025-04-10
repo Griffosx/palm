@@ -1,12 +1,17 @@
 import React from "react";
-import { gradients, noiseOpacity, solidColors } from "../styles/themes";
+import { gradients } from "../styles/themes";
+import NoiseOverlay from "./NoiseOverlay";
 
 interface BackgroundOverlayProps {
   gradient?: keyof typeof gradients;
   customGradient?: string;
-  solidColor?: keyof typeof solidColors | string;
+  solidColor?: string;
   noiseOpacity?: number;
   className?: string;
+  style?: React.CSSProperties;
+  rounded?: string;
+  position?: "absolute" | "fixed" | "relative";
+  zIndex?: number;
 }
 
 /**
@@ -18,18 +23,16 @@ const BackgroundOverlay: React.FC<BackgroundOverlayProps> = ({
   solidColor,
   noiseOpacity: customNoiseOpacity,
   className = "",
+  style = {},
+  rounded = "",
+  position = "absolute",
+  zIndex = 0,
 }) => {
   // Determine the background style
   let backgroundStyle = "";
 
   if (solidColor) {
-    // If it's a known color from our theme
-    if (solidColor in solidColors) {
-      backgroundStyle = solidColors[solidColor as keyof typeof solidColors];
-    } else {
-      // Otherwise use it as a custom color
-      backgroundStyle = solidColor;
-    }
+    backgroundStyle = solidColor;
   } else if (customGradient) {
     backgroundStyle = customGradient;
   } else if (gradient) {
@@ -43,28 +46,21 @@ const BackgroundOverlay: React.FC<BackgroundOverlayProps> = ({
     }, ${gradients.main.colors.join(", ")})`;
   }
 
-  // Use custom opacity if provided, otherwise use the default from themes
-  const opacity =
-    customNoiseOpacity !== undefined ? customNoiseOpacity : noiseOpacity;
+  // Combine styles
+  const combinedStyles = {
+    ...style,
+    background: backgroundStyle,
+    position,
+    zIndex,
+  };
+
+  // Combine class names
+  const combinedClassNames = `inset-0 w-full h-full ${rounded} ${className}`;
 
   return (
-    <div
-      className={`absolute inset-0 w-full h-full ${className}`}
-      style={{
-        background: backgroundStyle,
-      }}
-    >
+    <div className={combinedClassNames} style={combinedStyles}>
       {/* Noise overlay */}
-      <div
-        className="absolute inset-0 w-full h-full"
-        style={{
-          backgroundImage:
-            "url('data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noiseFilter%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.65%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url%28%23noiseFilter%29%22/%3E%3C/svg%3E')",
-          backgroundPosition: "0 0",
-          backgroundSize: "200px 200px",
-          opacity,
-        }}
-      />
+      <NoiseOverlay opacity={customNoiseOpacity} />
     </div>
   );
 };
