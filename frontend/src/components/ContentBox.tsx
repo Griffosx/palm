@@ -1,6 +1,6 @@
 import React from "react";
 import BackgroundOverlay from "./BackgroundOverlay";
-import { hexToRgba, brown, cream, borderCream } from "../styles/themes";
+import { hexToRgba, cream, borderCream } from "../styles/themes";
 
 interface ContentBoxProps {
   children: React.ReactNode;
@@ -17,7 +17,7 @@ const ContentBox: React.FC<ContentBoxProps> = ({
 }) => {
   return (
     <div
-      className={`flex flex-col relative h-full rounded-xl ${className}`}
+      className={`flex flex-col relative rounded-xl ${className}`}
       style={{
         boxShadow,
       }}
@@ -31,13 +31,13 @@ const ContentBox: React.FC<ContentBoxProps> = ({
 
       {/* Main content */}
       <div
-        className={`relative z-10 flex-1 px-6 pb-6 pt-0 rounded-xl overflow-auto border-1`}
+        className={`relative z-10 flex-1 rounded-xl overflow-auto border-1`}
         style={{
           borderColor: borderCream,
         }}
       >
-        <div className="rounded-xl p-6 md:p-8 transition-all duration-300 min-h-[200px]">
-          <div className="text-gray-700">{children}</div>
+        <div className="rounded-xl p-6 md:p-8 transition-all duration-300">
+          {children}
         </div>
       </div>
     </div>

@@ -3,14 +3,14 @@ import "./App.css";
 
 // Import components
 import SplashScreen from "./components/SplashScreen";
-import HomePage from "./pages/HomePage";
+import InboxPage from "./pages/inbox/Inbox";
 
 function App() {
   return (
     <HashRouter basename={"/"}>
       <Routes>
         <Route path="/" element={<SplashScreen />} />
-        <Route path="/home" element={<HomePage />} />
+        <Route path="/inbox" element={<InboxPage />} />
       </Routes>
     </HashRouter>
   );

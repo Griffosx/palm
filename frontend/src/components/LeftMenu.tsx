@@ -8,6 +8,7 @@ import {
   SentIcon,
   TrashIcon,
 } from "./Icons";
+import NoiseOverlay from "./NoiseOverlay";
 
 interface LeftMenuProps {
   title?: string;
@@ -26,7 +27,7 @@ const LeftMenu: React.FC<LeftMenuProps> = () => {
   ];
 
   return (
-    <div className="flex flex-col w-64 p-6">
+    <div className="flex flex-col w-64 p-6 pt-0 fixed h-screen">
       <nav>
         <ul>
           {menuItems.map((item) => {
@@ -39,7 +40,7 @@ const LeftMenu: React.FC<LeftMenuProps> = () => {
               <li key={item.path}>
                 <Link
                   to={item.path}
-                  className="flex items-center my-1 px-4 py-2 rounded-4xl transition-colors text-xl"
+                  className="flex items-center mb-1 px-4 py-2 rounded-3xl transition-colors text-xl relative overflow-hidden"
                   style={{
                     backgroundColor: useActiveColor ? peach : "transparent",
                     color: useActiveColor ? orange : darkBrown,
@@ -52,10 +53,11 @@ const LeftMenu: React.FC<LeftMenuProps> = () => {
                     setHoveredPath(null);
                   }}
                 >
-                  <div className="w-9 h-9 mr-4 flex items-center justify-center">
+                  {useActiveColor && <NoiseOverlay />}
+                  <div className="w-9 h-9 mr-4 flex items-center justify-center relative z-10">
                     <IconComponent fill={useActiveColor ? orange : darkBrown} />
                   </div>
-                  {item.name}
+                  <span className="relative z-10">{item.name}</span>
                 </Link>
               </li>
             );

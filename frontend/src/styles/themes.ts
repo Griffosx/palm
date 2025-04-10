@@ -1,10 +1,10 @@
 // Orange
-export const orange = "#EC8234";
+export const orange = "#E17C32";
 // Peach
 export const lightPeach = "#F9E2BE";
-export const peach = "#F9D59B";
+export const peach = "#F9C995";
 // Aquamarine
-export const lightAquamarine = "#E8EFDC";
+export const lightAquamarine = "#E9F0DD";
 export const aquamarine = "#CAE7D4";
 export const darkAquamarine = "#97CAB5";
 // Brown
