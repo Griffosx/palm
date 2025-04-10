@@ -19,7 +19,7 @@ const Wrapper: React.FC<WrapperProps> = ({ children, title }) => {
       <LeftMenu title={title} />
 
       {/* Right content area with left padding to accommodate fixed menu */}
-      <div className="pl-64 w-full py-6 px-6">{children}</div>
+      <div className="pl-64 w-full py-4 h-full">{children}</div>
     </div>
   );
 };

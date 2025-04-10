@@ -75,8 +75,7 @@ const EmailDetail: React.FC<EmailDetailProps> = ({ emailId }) => {
   });
 
   return (
-    <div className="h-full flex flex-col">
-      {/* Email header - fixed, doesn't scroll */}
+    <div className="flex flex-col h-full">
       <div className="mb-4 flex-shrink-0">
         <h1 className="text-2xl font-bold mb-4">{email.subject}</h1>
 
@@ -97,12 +96,9 @@ const EmailDetail: React.FC<EmailDetailProps> = ({ emailId }) => {
         </div>
       </div>
 
-      {/* Scrollable content area */}
-      <div className="flex-grow overflow-auto">
-        {/* Email body */}
+      <div className="flex-grow overflow-y-auto pr-2">
         <div dangerouslySetInnerHTML={{ __html: email.body }} />
 
-        {/* Attachments if present */}
         {email.attachments && email.attachments.length > 0 && (
           <div className="mt-6 pt-4 border-t border-gray-200">
             <h2 className="text-lg font-medium mb-2">Attachments</h2>

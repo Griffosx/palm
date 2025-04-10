@@ -31,7 +31,7 @@ const ContentBox: React.FC<ContentBoxProps> = ({
 
       {/* Main content */}
       <div
-        className={`relative z-10 flex-1 rounded-xl overflow-auto border-1`}
+        className={`relative z-10 flex-1 rounded-xl border-1`}
         style={{
           borderColor: borderCream,
         }}

@@ -82,7 +82,7 @@ const EmailList: React.FC<EmailListProps> = ({
   }
 
   return (
-    <div className="h-full overflow-y-auto">
+    <div>
       {emails.length === 0 && !loading ? (
         <div className="p-4 text-center text-gray-500">No emails found</div>
       ) : (

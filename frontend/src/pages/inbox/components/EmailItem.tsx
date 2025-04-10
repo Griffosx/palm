@@ -60,18 +60,18 @@ const EmailItem: React.FC<EmailItemProps> = ({ email, onClick }) => {
 
   const rightSide = () => {
     return (
-      <div className="flex items-start relative z-10">
-        <div className="flex-grow max-w-80">
+      <div className="flex-grow flex items-start relative z-10 min-w-0">
+        <div className="flex-grow min-w-0">
           <div className="flex justify-between items-start mb-1 text-left">
-            <div className="font-medium truncate">{senderDisplay}</div>
-            <div className="text-xs ml-2 whitespace-nowrap">
+            <div className="font-medium truncate min-w-0">{senderDisplay}</div>
+            <div className="text-xs ml-2 whitespace-nowrap flex-shrink-0">
               {formattedDate}
             </div>
           </div>
-          <div className="font-medium mb-1 truncate text-left">
+          <div className="font-medium mb-1 truncate text-left min-w-0">
             {email.subject}
           </div>
-          <div className="text-sm truncate text-left">
+          <div className="text-sm truncate text-left min-w-0">
             {email.body.replace(/<[^>]*>/g, "").substring(0, 100)}
             {email.body.length > 100 ? "..." : ""}
           </div>

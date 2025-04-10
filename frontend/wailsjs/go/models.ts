@@ -1,15 +1,15 @@
 export namespace controllers {
-
+	
 	export class AttachmentResponse {
 	    id: number;
 	    filename: string;
 	    size: number;
 	    mimeType: string;
-
+	
 	    static createFrom(source: any = {}) {
 	        return new AttachmentResponse(source);
 	    }
-
+	
 	    constructor(source: any = {}) {
 	        if ('string' === typeof source) source = JSON.parse(source);
 	        this.id = source["id"];
@@ -23,11 +23,11 @@ export namespace controllers {
 	    email: string;
 	    name: string;
 	    type: string;
-
+	
 	    static createFrom(source: any = {}) {
 	        return new RecipientResponse(source);
 	    }
-
+	
 	    constructor(source: any = {}) {
 	        if ('string' === typeof source) source = JSON.parse(source);
 	        this.id = source["id"];
@@ -48,11 +48,11 @@ export namespace controllers {
 	    importance: string;
 	    recipients: RecipientResponse[];
 	    attachments?: AttachmentResponse[];
-
+	
 	    static createFrom(source: any = {}) {
 	        return new EmailResponse(source);
 	    }
-
+	
 	    constructor(source: any = {}) {
 	        if ('string' === typeof source) source = JSON.parse(source);
 	        this.id = source["id"];
@@ -67,7 +67,7 @@ export namespace controllers {
 	        this.recipients = this.convertValues(source["recipients"], RecipientResponse);
 	        this.attachments = this.convertValues(source["attachments"], AttachmentResponse);
 	    }
-
+	
 		convertValues(a: any, classs: any, asMap: boolean = false): any {
 		    if (!a) {
 		        return a;
@@ -92,11 +92,11 @@ export namespace controllers {
 	    page: number;
 	    pageSize: number;
 	    totalPages: number;
-
+	
 	    static createFrom(source: any = {}) {
 	        return new ListEmailsResponse(source);
 	    }
-
+	
 	    constructor(source: any = {}) {
 	        if ('string' === typeof source) source = JSON.parse(source);
 	        this.emails = this.convertValues(source["emails"], EmailResponse);
@@ -105,7 +105,7 @@ export namespace controllers {
 	        this.pageSize = source["pageSize"];
 	        this.totalPages = source["totalPages"];
 	    }
-
+	
 		convertValues(a: any, classs: any, asMap: boolean = false): any {
 		    if (!a) {
 		        return a;
