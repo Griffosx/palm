@@ -11,6 +11,7 @@ import {
   KnowledgeIcon,
 } from "../../../components/Icons";
 import NoiseOverlay from "../../../components/NoiseOverlay";
+import { getDeterministicColor } from "../utils/colorUtils";
 
 interface EmailDetailPanelProps {
   selectedEmailId: number | null;
@@ -140,11 +141,16 @@ const EmailDetailPanel: React.FC<EmailDetailPanelProps> = ({
                     {email.subject || "(no subject)"}
                   </h1>
                   <div className="flex items-center mb-1">
-                    <div className="w-8 h-8 rounded-full bg-gray-300 flex items-center justify-center mr-3 relative overflow-hidden flex-shrink-0">
+                    <div
+                      className="w-8 h-8 rounded-full bg-gray-300 flex items-center justify-center mr-3 relative overflow-hidden flex-shrink-0"
+                      style={{
+                        backgroundColor: getDeterministicColor(
+                          email.senderEmail
+                        ),
+                      }}
+                    >
                       <NoiseOverlay />
-                      <span className="z-10 font-bold text-sm">
-                        {getInitials(email)}
-                      </span>
+                      <span className="z-10 text-sm">{getInitials(email)}</span>
                     </div>
                     <div className="text-sm overflow-hidden">
                       <div
@@ -171,20 +177,20 @@ const EmailDetailPanel: React.FC<EmailDetailPanelProps> = ({
 
                 <div className="flex flex-col items-end flex-shrink-0 ml-4">
                   <div className="flex space-x-2 mb-2">
-                    <button className="p-1.5">
+                    <button className="p-1.5 hover:text-orange-500 transition-colors duration-150 cursor-pointer">
                       <ReplyIcon fill="currentColor" width="20" height="20" />
                     </button>
-                    <button className="p-1.5">
+                    <button className="p-1.5 hover:text-orange-500 transition-colors duration-150 cursor-pointer">
                       <ReplyAllIcon
                         fill="currentColor"
                         width="20"
                         height="20"
                       />
                     </button>
-                    <button className="p-1.5">
+                    <button className="p-1.5 hover:text-orange-500 transition-colors duration-150 cursor-pointer">
                       <ForwardIcon fill="currentColor" width="20" height="20" />
                     </button>
-                    <button className="p-1.5">
+                    <button className="p-1.5 hover:text-orange-500 transition-colors duration-150 cursor-pointer">
                       <AIIcon fill="currentColor" width="20" height="20" />
                     </button>
                   </div>

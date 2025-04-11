@@ -10,6 +10,8 @@ export const darkAquamarine = "#97CAB5";
 // Brown
 export const brown = "#BCA482";
 export const darkBrown = "#62533C";
+// Beige
+export const beige = "#F4E7D3";
 // Cream
 export const cream = "#FEF6E5";
 export const borderCream = "#E2C59C";

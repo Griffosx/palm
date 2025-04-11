@@ -8,6 +8,7 @@ import {
   aquamarine,
   lightAquamarine,
 } from "../../../styles/themes";
+import { getDeterministicColor } from "../utils/colorUtils";
 
 interface EmailItemProps {
   email: controllers.EmailResponse;
@@ -30,11 +31,28 @@ const EmailItem: React.FC<EmailItemProps> = ({
   const senderDisplay = email.senderName || email.senderEmail;
   const firstLetter = senderDisplay.charAt(0).toUpperCase();
 
-  // Randomly select a background color
+  // Function to generate a hash from a string
+  const stringToHash = (str: string): number => {
+    let hash = 0;
+    for (let i = 0; i < str.length; i++) {
+      hash = (hash << 5) - hash + str.charCodeAt(i);
+      hash |= 0; // Convert to 32bit integer
+    }
+    return Math.abs(hash); // Ensure positive number
+  };
+
+  // Deterministically select a background color based on sender email
   const backgroundColor = useMemo(() => {
     const colors = [darkAquamarine, orange, peach];
-    return colors[Math.floor(Math.random() * colors.length)];
-  }, [email.id]); // Ensure same color for same email
+    if (!email.senderEmail) {
+      // Fallback if senderEmail is somehow missing
+      return colors[0];
+    }
+    const hash = stringToHash(email.senderEmail);
+    const colorIndex = hash % colors.length;
+    return colors[colorIndex];
+    return getDeterministicColor(email.senderEmail);
+  }, [email.senderEmail]); // Ensure color is based on sender email
 
   // Track hover state
   const [isHovered, setIsHovered] = React.useState(false);
