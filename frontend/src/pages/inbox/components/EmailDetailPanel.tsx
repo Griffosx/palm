@@ -172,32 +172,20 @@ const EmailDetailPanel: React.FC<EmailDetailPanelProps> = ({
                 <div className="flex flex-col items-end flex-shrink-0 ml-4">
                   <div className="flex space-x-2 mb-2">
                     <button className="p-1.5">
-                      <KnowledgeIcon
+                      <ReplyIcon fill="currentColor" width="20" height="20" />
+                    </button>
+                    <button className="p-1.5">
+                      <ReplyAllIcon
                         fill="currentColor"
                         width="20"
                         height="20"
                       />
                     </button>
                     <button className="p-1.5">
-                      <KnowledgeIcon
-                        fill="currentColor"
-                        width="20"
-                        height="20"
-                      />
+                      <ForwardIcon fill="currentColor" width="20" height="20" />
                     </button>
                     <button className="p-1.5">
-                      <KnowledgeIcon
-                        fill="currentColor"
-                        width="20"
-                        height="20"
-                      />
-                    </button>
-                    <button className="p-1.5">
-                      <KnowledgeIcon
-                        fill="currentColor"
-                        width="20"
-                        height="20"
-                      />
+                      <AIIcon fill="currentColor" width="20" height="20" />
                     </button>
                   </div>
                   <div className="text-xs whitespace-nowrap">
